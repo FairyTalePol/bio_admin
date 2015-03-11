@@ -1,0 +1,15 @@
+auth:
+    resource: "@AdminClientBundle/Controller/AuthController.php"
+    type:     annotation
+
+client:
+    resource: "@AdminClientBundle/Controller/ClientController.php"
+    type:     annotation
+
+db_role:
+    resource: "@AdminClientBundle/Controller/DBRoleController.php"
+    type:     annotation
+
+contact:
+    resource: "@AdminClientBundle/Controller/ContactController.php"
+    type:     annotation

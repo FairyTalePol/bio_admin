@@ -1,0 +1,7 @@
+{% extends app.request.isXmlHttpRequest ? 'AdminClientBundle::ajax.html.twig' : app.security.isGranted('IS_AUTHENTICATED_FULLY') ? 'AdminClientBundle::layout.html.twig' : 'AdminClientBundle::default.html.twig' %}
+
+{% block login %}
+    {% if not app.security.isGranted('IS_AUTHENTICATED_FULLY') %}
+        {% include 'AdminClientBundle:Auth:login.html.twig' %}
+    {% endif %}
+{% endblock %}

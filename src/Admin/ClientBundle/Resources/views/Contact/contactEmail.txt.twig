@@ -1,0 +1,5 @@
+{{ mail.body|striptags }}
+{{ ('-- ')|raw }}
+От: {{ mail.name|striptags }} <{{ mail.email }}>
+Телефон: {{ mail.tel }}
+IP: {{ ip }} [{{ hostname }}]

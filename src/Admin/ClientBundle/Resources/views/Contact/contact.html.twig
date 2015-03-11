@@ -1,0 +1,70 @@
+{% if app.session.flashbag.has('form-notice') %}
+    {% for flashMessage in app.session.flashbag.get('form-notice') %}
+        <div class="modal fade modal-notice" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p style="text-align:center; color: green; font-weight: bold; font-size: 1.4em;">{{ flashMessage }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+{% if app.session.flashbag.has('form-errors') %}
+    <script>(function () {
+            location.href="#contact_form";
+        })();</script>
+    {% for flashMessage in app.session.flashbag.get('form-errors') %}
+        {% for error in flashMessage %}
+        <div class="modal fade modal-notice" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p style="text-align:center; color: red; font-weight: bold; font-size: 1.4em;">{{ error.message }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+<div class="col dark ">
+    <div class="vc_span11 wpb_column column_container col">
+        <div class="wpb_wrapper">
+            <div class="wpb_text_column wpb_content_element">
+                <div class="wpb_wrapper">
+                    <div class="pismo">
+                        <div class="wpcf7">
+                            <form id="contact_form"action="{{ path('contact') }}" method="post" {{ form_enctype(form) }}
+                                  class="wpcf7-form">
+
+                                <p><span class="wpcf7-form-control-wrap your-name">{{ form_widget(form.name) }}</span>
+                                </p>
+
+                                <p><span class="wpcf7-form-control-wrap your-email">{{ form_widget(form.email) }}</span>
+                                </p>
+
+                                <p><span class="wpcf7-form-control-wrap your-tel">{{ form_widget(form.tel) }}</span></p>
+
+                                <p>
+                                    <span class="wpcf7-form-control-wrap your-message">{{ form_widget(form.body) }}</span>
+                                </p>
+                                {{ form_rest(form) }}
+                                <p align='center'><input type="submit" value="Отправить" class="nectar-button medium"/>
+                                </p>
+
+                                <div class="wpcf7-response-output wpcf7-display-none"></div>
+
+                                {% if form_errors(form) %}
+                                    <div class="alert alert-warning">{{ form_errors(form) }}</div>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

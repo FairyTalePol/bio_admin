@@ -1,0 +1,25 @@
+#api_data:
+#    resource: "@APIDataBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+#admin_data:
+#    resource: "@AdminDataBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+admin_client:
+    resource: "@AdminClientBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+    pattern:  /{_locale}/login
+    defaults: { _controller: AdminClientBundle:Auth:index }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern: /logout
+
+contact_form:
+    pattern:  /{_locale}/contact
+    defaults: { _controller: AdminClientBundle:Contact:contact }

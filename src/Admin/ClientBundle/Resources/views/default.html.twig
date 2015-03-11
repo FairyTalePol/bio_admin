@@ -1,0 +1,998 @@
+{% spaceless %}
+  <!DOCTYPE HTML>
+  <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{% block title %}АгроКонтролер{% endblock %}</title>
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+
+    <style type="text/css">
+      @font-face {
+        font-family: OpenSansLight;
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Light-webfont.eot') }}");
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Light-webfont.eot?#iefix') }}") format("embedded-opentype"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Light-webfont.woff') }}") format("woff"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Light-webfont.ttf') }}") format("truetype") !important
+      }
+
+      @font-face {
+        font-family: OpenSansRegular;
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Regular-webfont.eot') }}");
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Regular-webfont.eot?#iefix') }}") format("embedded-opentype"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Regular-webfont.woff') }}") format("woff"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Regular-webfont.ttf') }}") format("truetype") !important
+      }
+
+      @font-face {
+        font-family: OpenSansSemibold;
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Semibold-webfont.eot') }}");
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Semibold-webfont.eot?#iefix') }}") format("embedded-opentype"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Semibold-webfont.woff') }}") format("woff"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Semibold-webfont.ttf') }}") format("truetype") !important
+      }
+
+      @font-face {
+        font-family: OpenSansBold;
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Bold-webfont.eot') }}");
+        src: url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Bold-webfont.eot?#iefix') }}") format("embedded-opentype"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Bold-webfont.woff') }}") format("woff"), url("{{ asset('bundles/adminclient/fonts/index/OpenSans-Bold-webfont.ttf') }}") format("truetype") !important
+      }
+    </style>
+  </head>
+
+
+  <body>
+
+
+  <div id="header-space"></div>
+
+
+  <div id="header-outer" data-using-secondary="0" data-using-logo="1" data-logo-height="65" data-padding="15"
+       data-header-resize="">
+    <header id="top">
+      <div class="container span_12">
+        <div class="row">
+          <div class="col span_3">
+            <a id="logo" href="/">
+              {% image
+              '@AdminClientBundle/Resources/public/images/index/agrocontroler-logo-exp.png' %}
+              <img alt="АгроКонтролер"
+                   src="{{ asset_url }}"/>
+              {% endimage %}
+            </a>
+          </div>
+          <!--/span_3-->
+          <div class="col span_9 col_last">
+            <nav>
+              <ul>
+                <li id="telnumber">
+                  <div id="tel">
+                    <a>+38 (066) 211-59-30</a>
+                  </div>
+                </li>
+
+                <li id="lgnbtn">
+                  <div id="loginbtn" data-toggle="modal" data-target=".modal-login-window">
+                    {#<img src="{{ asset('bundles/adminclient/images/index/login.png') }}">#}
+                    {#<div class="loginbtn">Вход</div>#}
+                    <input type="submit" value="ВХОД" class="nectar-button medium"
+                           style="width: 100px; height: 40px; font-size: 16px;">
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!--/span_9-->
+        </div>
+        <!--/row-->
+      </div>
+      <!--/container-->
+    </header>
+  </div>
+  <!--/header-outer-->
+
+  {#<div class="modal fade modal-login-window" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">#}
+  {#<div class="modal-dialog modal-sm">#}
+  {#<div class="modal-content">#}
+  {#<div class="modal-header">#}
+  {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+  {#<h4 class="modal-title" id="mySmallModalLabel">Авторизация</h4>#}
+  {#</div>#}
+  {#<div class="modal-body">#}
+  {#{% block login %}{% endblock %}#}
+  {#</div>#}
+  {#</div>#}
+  {#</div>#}
+  {#</div>#}
+
+  <div class="modal fade modal-login-window" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+       aria-hidden="true">
+    <div class="login modal-dialog">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h4 id="mySmallModalLabel">Вход в систему</h4>
+      {% block login %}{% endblock %}
+    </div>
+  </div>
+
+  <div class="container-wrap">
+    <div class="container main-content">
+      <div class="row">
+
+        {% block slider %}
+          <div class="wpb_row vc_row-fluid full-width-content standard_section" style="padding-top: 0;">
+            <div class="col dark">
+              <div class="vc_span12 wpb_column column_container col">
+                <div class="wpb_wrapper">
+
+
+                  <div id="carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                      <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                      <li data-target="#carousel" data-slide-to="1"></li>
+                      <li data-target="#carousel" data-slide-to="2"></li>
+                      <li data-target="#carousel" data-slide-to="3"></li>
+                      <li data-target="#carousel" data-slide-to="4"></li>
+                      <li data-target="#carousel" data-slide-to="5"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      <div class="item active">
+                        {% image
+                        '@AdminClientBundle/Resources/public/images/index/slider/1.jpg' %}
+                        <img width="100%" data-src="{{ asset_url }}"
+                             src="{{ asset_url }}">
+                        {% endimage %}
+                      </div>
+                      <div class="item">
+                        {% image
+                        '@AdminClientBundle/Resources/public/images/index/slider/2.jpg' %}
+                        <img width="100%" data-src="{{ asset_url }}"
+                             src="{{ asset_url }}">
+                        {% endimage %}
+                      </div>
+                      <div class="item">
+                        {% image
+                        '@AdminClientBundle/Resources/public/images/index/slider/3.jpg' %}
+                        <img width="100%" data-src="{{ asset_url }}"
+                             src="{{ asset_url }}">
+                        {% endimage %}
+                      </div>
+                      <div class="item">
+                        {% image
+                        '@AdminClientBundle/Resources/public/images/index/slider/4.jpg' %}
+                        <img width="100%" data-src="{{ asset_url }}"
+                             src="{{ asset_url }}">
+                        {% endimage %}
+                      </div>
+                      <div class="item">
+                        {% image
+                        '@AdminClientBundle/Resources/public/images/index/slider/5.jpg' %}
+                        <img width="100%" data-src="{{ asset_url }}"
+                             src="{{ asset_url }}">
+                        {% endimage %}
+                      </div>
+                      <div class="item">
+                        {% image
+                        '@AdminClientBundle/Resources/public/images/index/slider/6.jpg' %}
+                        <img width="100%" data-src="{{ asset_url }}"
+                             src="{{ asset_url }}">
+                        {% endimage %}
+                      </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock %}
+
+        {% block aboutAgroController %}
+          <div class="wpb_row vc_row-fluid standard_section" style="padding-top: 0; padding-bottom: 0; ">
+            <div class="col span_12 dark ">
+              <div class="vc_span4 wpb_column column_container col" style="top: -30px;">
+                <div class="wpb_wrapper">
+
+                  <div class="wpb_text_column wpb_content_element  econom1t">
+                    <div class="wpb_wrapper">
+                      <p>Вносит информацию о расходе:<br/>
+                        - семян<br/>
+                        - удобрений<br/>
+                        - СЗР<br/>
+                        - материалов</p>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  agronom1t">
+                    <div class="wpb_wrapper">
+                      <p>- вносит информацию о состоянии полей<br/>
+                        - планирует размещение культур<br/>
+                        - формирует технологические карты</p>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  technict">
+                    <div class="wpb_wrapper">
+                      <p>Комплекс трекеров и датчиков позволяет:<br/>
+                        - получать координаты, скорость<br/>
+                        - фиксировать наличие прицепа<br/>
+                        - идентифицироваь механизатора<br/>
+                        - определять объем топлива в баке<br/>
+                        - фиксировать время работы двигателя</p>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  sputnikt">
+                    <div class="wpb_wrapper">
+                      <p>31 спутник предоставляет возможность<br/>
+                        определения:<br/>
+                        - местоположения<br/>
+                        - скорости<br/>
+                        - высоты<br/>
+                        - площади</p>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  sputnik">
+                    <div class="wpb_wrapper">
+                      <h3>GPS-спутники</h3>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  technic">
+                    <div class="wpb_wrapper">
+                      <h3>Техника</h3>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  agronom1">
+                    <div class="wpb_wrapper">
+                      <h3>Агроном</h3>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  econom1">
+                    <div class="wpb_wrapper">
+                      <h3>Экономист</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="vc_span4 wpb_column column_container col">
+                <div class="wpb_wrapper">
+
+                </div>
+              </div>
+
+              <div class="vc_span4 wpb_column column_container col" style="top: -30px;">
+                <div class="wpb_wrapper">
+
+                  <div class="wpb_text_column wpb_content_element  mehanizt">
+                    <div class="wpb_wrapper">
+                      <p>- прозрачный расчет заработной платы<br/>
+                        - четкое понимание задания на смену<br/>
+                        - избежание &#171;бумажной&#187; работы с нарядами</p>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  agronom2t">
+                    <div class="wpb_wrapper">
+                      <p>- карта состояния полей<br/>
+                        - история полей<br/>
+                        - анализ урожайности<br/>
+                        - контроль технологических операций</p>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  ekonom2t">
+                    <div class="wpb_wrapper">
+                      <p>- анализ технологических карт<br/>
+                        - контроль выполнения бюджетов<br/>
+                        - формирования актов списания<br/>
+                        - экономический анализ</p>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  directort">
+                    <div class="wpb_wrapper">
+                      <p>- повышение эффективности управления<br/>
+                        - контроль состояния полей<br/>
+                        - формирование затрат по культурам<br/>
+                        - ежедневный учет<br/>
+                        - предотвращение хищений<br/>
+                        - эффективное ипользование ресурсов</p>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  sobstvennikt">
+                    <div class="wpb_wrapper">
+                      <p>- единое информационное пространство<br/>
+                        - общая картина бизнеса<br/>
+                        - прозрачный учет на предприятии<br/>
+                        - доступ из любой точки мира</p>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  sobstvennik">
+                    <div class="wpb_wrapper">
+                      <h3>Собственник</h3>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  director">
+                    <div class="wpb_wrapper">
+                      <h3>Директор</h3>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  econom2">
+                    <div class="wpb_wrapper">
+                      <h3>Экономист</h3>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  agronom2">
+                    <div class="wpb_wrapper">
+                      <h3>Агроном</h3>
+
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element  mehaniz">
+                    <div class="wpb_wrapper">
+                      <h3>Механизатор</h3>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wpb_row vc_row-fluid full-width-section standard_section"
+               style="background-color: #f5f5f5; padding-top: 0; padding-bottom: 50px; ">
+            <div class="col span_12 dark left">
+              <div class="vc_span12 wpb_column column_container col">
+                <div class="wpb_wrapper">
+                  <div class="wpb_text_column wpb_content_element ">
+                    <div class="wpb_wrapper">
+                      <h1 style="text-align: center;">Что такое Агроконтролер?</h1>
+
+                      <h3 style="text-align: center;">Эффективная система управления сельскохозяйственным
+                        предприятием.</h3>
+                    </div>
+                  </div>
+                  <div style="margin-top: 10px; margin-bottom: 10px;" class="divider-border"></div>
+                  {% image
+                  '@AdminClientBundle/Resources/public/images/index/plashka.png' %}
+                  <img class="img-with-animation plashka" data-delay="0"
+                       src="{{ asset_url }}" alt=""/>
+                  {% endimage %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock %}
+
+        {% block mainModules %}
+          <div class="wpb_row vc_row-fluid full-width-section standard_section"
+               style="background-color: #ffffff; padding-top: 20px; padding-bottom: 40px; ">
+            <div class="col span_12 dark left">
+              <div class="vc_span12 wpb_column column_container col">
+                <div class="wpb_wrapper">
+                  <div class="wpb_text_column wpb_content_element ">
+                    <div class="wpb_wrapper">
+                      <h1 style="text-align: center;">Основные модули системы</h1>
+                    </div>
+                  </div>
+                  <div style="margin-top: 10px; margin-bottom: 10px;" class="divider-border"></div>
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="vc_span4 wpb_column column_container col boxed">
+                        <div class="wpb_wrapper">
+                          <div class="wpb_text_column wpb_content_element preim1">
+                            <div class="wpb_wrapper">
+                              <h3 style="text-align: center;">Карточка поля</h3>
+
+                              <p><strong>Учет и оптимизация в разрезе каждого поля:</strong><br/>
+                                - севооборота<br/>
+                                - наличия питательных веществ<br/>
+                                - динамики развития культур<br/>
+                                - сроков проведения технологических операций<br/>
+                                - затрат и материалов</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span4 wpb_column column_container col boxed">
+                        <div class="wpb_wrapper">
+                          <div class="wpb_text_column wpb_content_element preim1">
+                            <div class="wpb_wrapper">
+                              <h3 style="text-align: center;">Состояние поля</h3>
+
+                              <p><strong>Возможность своевременно повлиять на сохранение или
+                                  увеличение урожая за счет:</strong><br/>
+                                - отслеживания истории полей<br/>
+                                - карты питательных веществ<br/>
+                                - актуальности состояния посевов<br/>
+                                - оценка прогноза урожайности</p>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span4 wpb_column column_container col boxed">
+                        <div class="wpb_wrapper">
+                          <div class="wpb_text_column wpb_content_element preim2">
+                            <div class="wpb_wrapper">
+                              <h3 style="color: #cb2026; text-align: center;">Техника</h3>
+
+                              <p><strong>Возможность оперативно управлять техникой работающей в
+                                  полях:</strong><br/>
+                                - оптимизировать расход ГСМ как минимум на 20%<br/>
+                                - контролировать площадь обработки, маршрут, скорость движения<br/>
+                                - контролировать рабочее время по каждому виду техники, по операциям
+                              </p>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="vc_span3 wpb_column column_container col boxed" data-animation=""
+                           data-delay="0">
+                        <div class="wpb_wrapper">
+
+                          <div class="wpb_text_column wpb_content_element  preim2">
+                            <div class="wpb_wrapper">
+                              <h3 style="color: #cb2026; text-align: center;">Персонал</h3>
+
+                              <p>- эффективное управление фондом оплаты труда<br/>
+                                - расчет ЗП на основании показателей KPI<br/>
+                                - учет производительности труда механизаторов</p>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span3 wpb_column column_container col boxed" data-animation=""
+                           data-delay="0">
+                        <div class="wpb_wrapper">
+
+                          <div class="wpb_text_column wpb_content_element  preim2">
+                            <div class="wpb_wrapper">
+                              <h3 style="color: #cb2026; text-align: center;">Материалы</h3>
+
+                              <p>- формирование актов списания по материалам<br/>
+                                - учет материалов по полям и культурам<br/>
+                                - анализ использования материалов</p>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span3 wpb_column column_container col boxed" data-animation=""
+                           data-delay="0">
+                        <div class="wpb_wrapper">
+
+                          <div class="wpb_text_column wpb_content_element  preim2">
+                            <div class="wpb_wrapper">
+                              <h3 style="color: #cb2026; text-align: center;">Затраты</h3>
+
+                              <p>- оперативный контроль затрат на производство<br/>
+                                - формированием затрат по полям, культурам<br/>
+                                - анализ структуры затрат по материалам и культурам</p>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span3 wpb_column column_container col boxed" data-animation=""
+                           data-delay="0">
+                        <div class="wpb_wrapper">
+
+                          <div class="wpb_text_column wpb_content_element  preim2">
+                            <div class="wpb_wrapper">
+                              <h3 style="color: #cb2026; text-align: center;">Урожай</h3>
+
+                              <p>- анализ урожайности на основании факторов производства<br/>
+                                - контроль урожайности в процессе вегетации<br/>
+                                - учет фактической урожайности по полям и культурам</p>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock %}
+
+        {% block exmplPic %}
+          <div class="wpb_row vc_row-fluid full-width-section standard_section"
+               style="background-color: #ffffff; padding-top: 0; padding-bottom: 25px; ">
+            <div class="col span_12 dark left">
+              <div class="vc_span12 wpb_column column_container col">
+                <div class="wpb_wrapper">
+
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="vc_span12 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          {% image
+                          '@AdminClientBundle/Resources/public/images/index/back1.jpg' %}
+                          <img width="1000px" class="img-with-animation"
+                               src="{{ asset_url }}" alt=""/>
+                          {% endimage %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% image
+                  '@AdminClientBundle/Resources/public/images/index/back2.jpg' %}
+                  <img width="1000px" class="img-with-animation"
+                       src="{{ asset_url }}" alt=""/>
+                  {% endimage %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock %}
+
+        {% block equipment %}
+          <div class="wpb_row vc_row-fluid full-width-section standard_section"
+               style="padding-top: 20px; padding-bottom: 20px; ">
+            <div class="col span_12 dark left">
+              <div class="vc_span12 wpb_column column_container col">
+                <div class="wpb_wrapper">
+
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="vc_span12 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+
+                          <div class="wpb_text_column wpb_content_element">
+                            <div class="wpb_wrapper">
+                              <h1 style="text-align: center;"><strong>Оборудование</strong></h1>
+
+                            </div>
+                          </div>
+                          <div style="margin-top: 10px; margin-bottom: 10px;"
+                               class="divider-border"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="vc_span4 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          {% image
+                          '@AdminClientBundle/Resources/public/images/index/41.jpg' %}
+                          <img class="img-with-animation "
+                               src="{{ asset_url }}" alt=""/>
+                          {% endimage %}
+                          <div class="wpb_text_column wpb_content_element  equip">
+                            <div class="wpb_wrapper">
+                              <h4 style="text-align: center;">Трекер BI910 TREK</h4>
+
+                              <p>Надежный GPS трекер, отслеживающий коррдинаты скорость и высоту с
+                                высокой точностью. Позволяет подключение одновременно большого
+                                количества дополнительных датчиков.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span4 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          {% image
+                          '@AdminClientBundle/Resources/public/images/index/51.jpg' %}
+                          <img class="img-with-animation "
+                               src="{{ asset_url }}" alt=""/>
+                          {% endimage %}
+                          <div class="wpb_text_column wpb_content_element  equip">
+                            <div class="wpb_wrapper">
+                              <h4 style="text-align: center;">Трекер BI868 TREK</h4>
+
+                              <p>Упрощенная версия GPS трекера, со встренными антеннами для
+                                возможности осуществления скрытого монтажа. Поключение
+                                дополнительных датчиков не предусмотрено.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span4 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          {% image
+                          '@AdminClientBundle/Resources/public/images/index/31.jpg' %}
+                          <img class="img-with-animation "
+                               src="{{ asset_url }}" alt=""/>
+                          {% endimage %}
+
+                          <div class="wpb_text_column wpb_content_element equip">
+                            <div class="wpb_wrapper">
+                              <h4 style="text-align: center;">BI310 Cicada</h4>
+
+                              <p>Маячек, определяющий точное местоположения раз в 3-6 часов, для
+                                определения местоположения груза либо похищенного транспортного
+                                средства.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="vc_span4 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          {% image
+                          '@AdminClientBundle/Resources/public/images/index/21.jpg' %}
+                          <img class="img-with-animation "
+                               src="{{ asset_url }}" alt=""/>
+                          {% endimage %}
+
+                          <div class="wpb_text_column wpb_content_element equip">
+                            <div class="wpb_wrapper">
+                              <h4 style="text-align: center;">Идентификатор прицепа</h4>
+
+                              <p>Предназначен для определения сцепки, в которой работает техника на
+                                полеых работах. Радиометки работают с радиусом 5 метров и
+                                устанавливаются на каждое прицепное устройство.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span4 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          {% image
+                          '@AdminClientBundle/Resources/public/images/index/11.jpg' %}
+                          <img class="img-with-animation "
+                               src="{{ asset_url }}" alt=""/>
+                          {% endimage %}
+
+                          <div class="wpb_text_column wpb_content_element equip">
+                            <div class="wpb_wrapper">
+                              <h4 style="text-align: center;">Датчик уровня топлива</h4>
+
+                              <p>Датчик предназначен для точного измерения уровня топлива в баках
+                                транспортных средств. Датчик применяется в составе системы
+                                спутникового контроля.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span4 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          {% image
+                          '@AdminClientBundle/Resources/public/images/index/61.jpg' %}
+                          <img class="img-with-animation "
+                               src="{{ asset_url }}" alt=""/>
+                          {% endimage %}
+
+                          <div class="wpb_text_column wpb_content_element equip">
+                            <div class="wpb_wrapper">
+                              <h4 style="text-align: center;">Идентификатор водителя</h4>
+
+                              <p>Устройство идентификации предназначено для распознавания людей,
+                                которые управляют транспортным средством. Каждому водителю выдается
+                                свой ключ ibutton.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock %}
+
+        {% block calcPrice %}
+          <div class="wpb_row vc_row-fluid full-width-section standard_section"
+               style="background-color: #ffffff; padding-top: 20px; padding-bottom: 25px; ">
+            <div class="col span_12 dark left">
+              <div class="vc_span12 wpb_column column_container col">
+                <div class="wpb_wrapper">
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="vc_span12 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="wpb_text_column wpb_content_element ">
+                    <div class="wpb_wrapper">
+                      <h1 style="text-align: center;">Расчет стоимости услуг</h1>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 10px; margin-bottom: 10px;" class="divider-border"></div>
+
+                  <div class="wpb_row vc_row-fluid standard_section"
+                       style="padding-top: 0; padding-bottom: 0; ">
+                    <div class="col span_12 dark ">
+                      <div class="wpb_column column_container col" style="width: 130px;">
+                        <div class="wpb_wrapper">
+                          <div style="height: 10px;" class="divider"></div>
+                          <div class="wpb_text_column wpb_content_element ">
+                            <div class="wpb_wrapper">
+                              <h4 style="text-align: right;">Площадь, га</h4>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span2 wpb_column column_container col" style="margin-right: 33%;">
+                        <div class="wpb_wrapper">
+                          <div class="wpb_raw_code wpb_content_element wpb_raw_html">
+                            <div class="wpb_wrapper">
+                              <input style="font-size: 16px" type="text" class="haAmount" size="40"
+                                     value="1" maxlength="6">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="wpb_column column_container col" style="width: 180px;">
+                        <div class="wpb_wrapper">
+                          <div style="height: 10px;" class="divider"></div>
+                          <div class="wpb_text_column wpb_content_element ">
+                            <div class="wpb_wrapper">
+                              <h3 style="text-align: right;">Единицы техники</h3>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="vc_span2 wpb_column column_container col">
+                        <div class="wpb_wrapper">
+                          <div class="wpb_raw_code wpb_content_element wpb_raw_html">
+                            <div class="wpb_wrapper">
+                              <input style="font-size: 16px" type="text" class="numOfEquip" size="40"
+                                     value="1" maxlength="5">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="callus"><p>Для расчета стоимости услуг свяжитесь с нами</p></div>
+
+                  <div class="row pricing-table five-cols ">
+                    <div class="pricing-column ">
+                      <h3>Состояния полей</h3>
+
+                      <div class="pricing-column-content _field">
+                        <h4><span class="dollar-sign">$/га</span> 0.5 </h4>
+                        <span class="interval">Абонплата в год</span>
+                        <ul>
+                          <li>Внедрение &#8212; бесплатно</li>
+                          <li style="text-align: left;">- история севооборота по каждому полю<br/>
+                            - динамика развития культуры на каждом поле<br/>
+                            - прогноз урожайности<br/>
+                            - карта наличия питательных веществ почвы
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="pricing-column ">
+                      <h3>Контроль техники</h3>
+
+                      <div class="pricing-column-content _equip">
+                        <h4><span class="dollar-sign"> $/ед</span> 150 </h4>
+                        <span class="interval">Абонплата в год</span>
+                        <ul>
+                          <li>Внедрение &#8212; $600/ед</li>
+                          <li style="text-align: left;">- контроль технологических операций по полям<br/>
+                            - учет расхода топлива<br/>
+                            - подсчет количества обработанных площадей<br/>
+                            - анализ работы механизатора<br/>
+                            - он-лайн контроль движения техники
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="pricing-column ">
+                      <h3>Учет материалов</h3>
+
+                      <div class="pricing-column-content _material">
+                        <h4><span class="dollar-sign">$/га</span> 3 </h4>
+                        <span class="interval">Абонплата в год</span>
+                        <ul>
+                          <li>Внедрение &#8212; $2/га</li>
+                          <li style="text-align: left;">- учет внесения материалов по полям и
+                            культурам<br/>
+                            - контроль внесения материалов по срокам<br/>
+                            - формирование актов списания по семенам, удобрениям, СЗР<br/>
+                            - анализ использования материалов<br/>
+                            - анализ структуры затрат
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="pricing-column ">
+                      <h3>Агроконсалтинг</h3>
+
+                      <div class="pricing-column-content _agroconsalt">
+                        <h4><span class="dollar-sign">$/га</span> 2 </h4>
+                        <span class="interval">Абонплата в год</span>
+                        <ul>
+                          <li>Внедрение &#8212; бесплатно</li>
+                          <li style="text-align: left;">- технологическое сопровождение предприятия
+                            независимым экспертом<br/>
+                            - выдача рекомендаций по срокам и нормам внесения материалов<br/>
+                            - расчет технологических карт<br/>
+                            - контроль и анализ использования ресурсов независимым специалистом
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="pricing-column highlight accent-color">
+                      <h3>Пакет премиум<span class="highlight-reason">Most Popular</span></h3>
+
+                      <div class="pricing-column-content _premium">
+                        <h4><span class="dollar-sign">$/га</span> 5 </h4>
+                        <span class="interval">Абонплата в год</span>
+                        <ul>
+                          <li>Внедрение &#8212; $3/га</li>
+                          <li style="text-align: left;">- технологическое сопровождение независимым
+                            экспертом<br/>
+                            - планирование производства<br/>
+                            - контроль и анализ выполнения технологических карт<br/>
+                            - контроль выполнения технологических операций<br/>
+                            - прозрачный контроль использования ресурсов<br/>
+                            - анализ результатов<br/>
+                            - учет по полям и культурам<br/>
+                            - мотивация персонала
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock %}
+
+        <div class="wpb_row vc_row-fluid full-width-section standard_section"
+             style="background-color: #f5f5f5; padding-top: 20px; padding-bottom: 0; ">
+          <div class="col span_12 dark left">
+            <div class="vc_span12 wpb_column column_container col">
+              <div class="wpb_wrapper">
+                <div class="wpb_text_column wpb_content_element ">
+                  <div class="wpb_wrapper">
+                    <h1 style="text-align: center;">Получить демо</h1>
+                  </div>
+                </div>
+                <div style="margin-top: 7px; margin-bottom: 7px;" class="divider-border"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wpb_row vc_row-fluid full-width-section standard_section">
+          <div class="col span_12 dark ">
+            <div class="vc_span8 wpb_column column_container col">
+              <div class="wpb_wrapper">
+                <div class="wpb_row vc_row-fluid standard_section" style="padding-top: 0; padding-bottom: 0;">
+                  {{ render(controller('AdminClientBundle:Contact:contact')) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="vc_span4 wpb_column column_container col">
+              <div class="wpb_wrapper">
+                <div class="wpb_text_column wpb_content_element getdemotext">
+                  <div class="wpb_wrapper">
+                    <h3>Для получения более подробной информации, а так же пробной версии программного
+                      обеспечения для Вашего предприятия, оставьте свои контактные данные и наш менеджер
+                      свяжется с Вами в ближайшие сроки.</h3>
+                  </div>
+                </div>
+
+                <div style="height: 20px;" class="divider"></div>
+
+                <div class="wpb_text_column wpb_content_element" style="text-align: center;">
+                  <div class="wpb_wrapper">
+                    <a class="nectar-button medium" href="/">Скачать презентацию</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--/row-->
+    </div>
+    <!--/container-->
+  </div>
+  {% block body %}
+  {% endblock %}
+  {% block footer %}
+    <div id="footer-outer">
+      <div class="row" id="copyright" style="height: 66px;">
+        <div class="container span_12">
+          <div class="col span_5">
+            <p>©2012-2014 Контролер</p>
+          </div>
+          <!--/span_5-->
+          <div class="col span_7 col_last">
+            <ul id="social"></ul>
+          </div>
+          <!--/span_7-->
+        </div>
+        <!--/container-->
+      </div>
+      <!--/row-->
+    </div><!--/footer-outer-->
+  {% endblock %}
+  {% stylesheets
+  '@AdminClientBundle/Resources/public/css/index/style.css'
+  '@AdminClientBundle/Resources/public/css/index/slider.css'
+  output='dstyle.css'
+  filter='?yui_css' %}
+  <link rel="stylesheet" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+
+  {% javascripts
+  '@AdminClientBundle/Resources/public/js/jquery/jquery.min.js'
+  '@AdminClientBundle/Resources/public/js/index/calc.js'
+  '@AdminClientBundle/Resources/public/js/bootstrap/bootstrap.min.js'
+  '@AdminClientBundle/Resources/public/js/jquery/jquery.maskedinput.min.js'
+  output='dscript.js'
+  filter='?yui_js' %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+  <script>
+    var loginError = $('div').hasClass('_getLoginError');
+    var contact_tel = $('#contact_tel');
+    $('.carousel').carousel({interval: 3000});
+    $('.modal-notice').modal('show');
+    //        $("#contact_tel").mask("+99999999999?99");
+    contact_tel.on('focus', function () {
+      if (contact_tel.val() === "") {
+        contact_tel.val('+');
+      }
+    });
+    contact_tel.on('blur', function () {
+      if (contact_tel.val() === "+") {
+        contact_tel.val('');
+      }
+    });
+
+    if (window.location.hash === '#login' || loginError) {
+      $('.modal-login-window').modal('show');
+    }
+  </script>
+  </body>
+  </html>
+{% endspaceless %}

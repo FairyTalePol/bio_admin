@@ -1,0 +1,47 @@
+{% spaceless %}
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome to agro-controller!{% endblock %}</title>
+    {% stylesheets
+    '@AdminClientBundle/Resources/public/css/bootstrap/bootstrap.min.css'
+    '@AdminClientBundle/Resources/public/css/bootstrap/bootstrap-theme.min.css'
+    '@AdminClientBundle/Resources/public/css/style.css'
+    output='lstyle.css'
+    filter='?yui_css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+        <ul class="nav navbar-nav">
+          {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="{{ path('client') }}">Пользователи</a></li>{% endif %}
+          {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="{{ path('db_role') }}">Пользователи БД</a></li>{% endif %}
+          {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="#">История аутентификации</a></li>{% endif %}
+          <li><a href="/logout">Выход</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id="content" class="container">
+    {% block body %}{% endblock %}
+  </div>
+  {% javascripts
+  '@AdminClientBundle/Resources/public/js/jquery/jquery.min.js'
+  '@AdminClientBundle/Resources/public/js/bootstrap/bootstrap.min.js'
+  '@AdminClientBundle/Resources/public/js/script.js'
+  output='lscript.js'
+  filter='?yui_js' %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+  </body>
+  </html>
+{% endspaceless %}

@@ -1,0 +1,47 @@
+security:
+    encoders:
+        Admin\ClientBundle\Entity\Client:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10000
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN]
+
+    providers:
+         main:
+            entity: { class: Admin\ClientBundle\Entity\Client, property: email }
+#        in_memory:
+#            memory:
+#                users:
+#                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        client:
+            pattern:  /.*
+            form_login:
+                check_path: /login_check
+                login_path: /#login
+            logout: true
+            security: true
+            anonymous: true
+            logout:
+                path:   /logout
+                target: /
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        #- { path: ^/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/conact/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_SUPER_ADMIN}
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

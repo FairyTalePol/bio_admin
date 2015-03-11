@@ -1,0 +1,11 @@
+                                                    <form method="post" action="/" enctype="application/x-www-form-urlencoded">
+                                                        {% if error is defined and error %}
+                                                            <div id="loginError"class="alert alert-danger _getLoginError">{% autoescape false %}{{ error|trans }}{% endautoescape %}</div>
+                                                        {% endif %}
+                                                        <label for="name"></label>
+                                                        <input required="required" placeholder="Email" name="_username" type="text" value="{{ last_username }}" class="txt_box" >
+                                                        <label for="password"></label>
+                                                        <input required="required" placeholder="Пароль" name="_password" type="password" class="txt_box"><br>
+                                                        <input type="submit" name="Submit" id="Submit" value="Войти" class="lgnbtn">
+
+                                                    </form>

@@ -1,0 +1,9 @@
+parameters:
+    # Contact form email address
+    admin_client.mail_subject: '[DEMO]'
+
+    admin_client.name_from: 'АгроКонтролер'
+    admin_client.email_from: 'agro@controler.ua'
+
+    admin_client.name_to: 'АгроКонтролер'
+    admin_client.email_to: 'agro@controler.ua'
