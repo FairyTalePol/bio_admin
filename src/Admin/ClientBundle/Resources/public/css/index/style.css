@@ -70,3 +70,30 @@ body{
     left: 505px;
     bottom: -170px;
 }
+/* Меню в шапке */
+.head-menu {
+    box-shadow: 0 1px 3px #c5c5c5;
+    position: fixed;
+    margin: 0 auto;
+    top: 0;
+    background: white;
+    z-index: 50;
+    width: 100%;
+    min-width: 1100px;
+    text-align: center;
+}
+.head-menu a.active-menu {
+    color: black;
+    border: none;
+}
+.head-menu a {
+    font-size: 12px;
+    margin: 10px 15px;
+    display: inline-block;
+}
+.head-menu a.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: #999;
+    border-bottom: none;
+}
