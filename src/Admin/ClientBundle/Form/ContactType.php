@@ -15,7 +15,7 @@ class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', [
+        $builder->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
             'attr' => [
                 'class' => 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required',
                 'placeholder' => 'Имя',
@@ -25,7 +25,7 @@ class ContactType extends AbstractType
             'error_bubbling' => true
         ]);
 
-        $builder->add('email', 'email', [
+        $builder->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', [
             'attr' => [
                 'class' => 'wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email',
                 'placeholder' => 'Email',
@@ -35,7 +35,7 @@ class ContactType extends AbstractType
             'error_bubbling' => true
         ]);
 
-        $builder->add('tel', 'text', [
+        $builder->add('tel', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
             'attr' => [
                 'class' => 'wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel',
                 'placeholder' => 'Номер телефона',
@@ -45,7 +45,7 @@ class ContactType extends AbstractType
             'error_bubbling' => true
         ]);
 
-        $builder->add('body', 'textarea', [
+        $builder->add('body', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
             'attr' => [
                 'class' => 'wpcf7-form-control wpcf7-textarea',
                 'cols' => 40,
@@ -60,7 +60,7 @@ class ContactType extends AbstractType
 
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'contact';
     }

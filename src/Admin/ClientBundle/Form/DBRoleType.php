@@ -5,7 +5,7 @@ namespace Admin\ClientBundle\Form;
 use Admin\ClientBundle\Entity\DBRole;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DBRoleType extends AbstractType
 {
@@ -15,7 +15,7 @@ class DBRoleType extends AbstractType
     $dbRole = $options['data'];
 
     $builder
-      ->add('role', 'text', [
+      ->add('role', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
         'attr' => [
           'class' => 'form-control',
           'placeholder' => 'Название роли'
@@ -23,7 +23,7 @@ class DBRoleType extends AbstractType
         'required' => true,
         'error_bubbling' => true
       ])
-      ->add('password', 'password', [
+      ->add('password', 'Symfony\Component\Form\Extension\Core\Type\PasswordType', [
         'attr' => [
           'class' => 'form-control',
           'placeholder' => 'Пароль'
@@ -31,7 +31,7 @@ class DBRoleType extends AbstractType
         'required' => $dbRole->getId() === null,
         'error_bubbling' => true
       ])
-      ->add('domain', 'text', [
+      ->add('domain', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
         'attr' => [
           'class' => 'form-control',
           'placeholder' => 'Домен'
@@ -41,14 +41,14 @@ class DBRoleType extends AbstractType
       ]);
   }
 
-  public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
   {
     $resolver->setDefaults(array(
       'data_class' => 'Admin\ClientBundle\Entity\DBRole'
     ));
   }
 
-  public function getName()
+    public function getBlockPrefix()
   {
     return 'admin_clientbundle_dbroletype';
   }

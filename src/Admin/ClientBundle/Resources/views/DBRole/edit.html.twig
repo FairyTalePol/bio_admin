@@ -1,4 +1,4 @@
-{% extends app.request.isXmlHttpRequest ? 'AdminClientBundle::ajax.html.twig' : app.security.isGranted('IS_AUTHENTICATED_FULLY') ? 'AdminClientBundle::layout.html.twig' : 'AdminClientBundle::default.html.twig' %}
+{% extends app.request.isXmlHttpRequest ? 'AdminClientBundle::ajax.html.twig' : is_granted('IS_AUTHENTICATED_FULLY') ? 'AdminClientBundle::layout.html.twig' : 'AdminClientBundle::default.html.twig' %}
 
 {% block body %}
   {% if form.vars.errors|length == 0 and app.request.method == 'POST' %}

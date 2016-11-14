@@ -1,0 +1,101 @@
+{% extends app.request.isXmlHttpRequest ? 'AdminClientBundle::ajax.html.twig' : app.user and is_granted('IS_AUTHENTICATED_FULLY') ? 'AdminClientBundle::layout.html.twig' : 'AdminClientBundle::default.html.twig' %}
+
+{% block body %}
+
+  <div id="modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <a href="{{ path('translation_add', {language_id: form.vars.value.language.id}) }}" id="add-translation-btn" class="btn btn-primary col-sm-3">Добавить перевод</a>
+
+  <form id="search_translations" class="form-inline" enctype="application/x-www-form-urlencoded" method="post" action="{{ path('translation') }}">
+    <div class="form-group col-sm-4">
+      <div class="col-sm-5">
+        {{ form_widget(form.language) }}
+      </div>
+    </div>
+
+    <table class="table table-responsive table-striped table-hover">
+      <thead>
+      <tr>
+        <th>Термин</th>
+        <th>Перевод</th>
+        <th>&nbsp;</th>
+      </tr>
+      <tr>
+        <th>{{ form_widget(form.term) }}</th>
+        <th>{{ form_widget(form.value) }}</th>
+        <th>
+          <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for translation in translations %}
+        <tr>
+          <td style="overflow-x: hidden; text-overflow: ellipsis; max-width: 300px;">{{ translation.term.name }}</td>
+          <td style="overflow-x: hidden; text-overflow: ellipsis; max-width: 300px;">{{ translation.value }}</td>
+          <td>
+            <div>
+              <form></form>
+              <form id="edit-translation-btn" style="display: inline-block; margin-right: 5px;"
+                    action="{{ path('translation_edit', {id: translation.id}) }}"
+                    enctype="application/x-www-form-urlencoded" method="get">
+                <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
+              </form>
+              <a href="{{ path('translation_delete', {id: translation.id}) }}"><span
+                    class="glyphicon glyphicon-remove"></span></a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="hide">
+      {{ form_rest(form) }}
+    </div>
+
+    {% if pages > 1 %}
+      <div class="pagination-bottom text-center"></div>
+    {% endif %}
+  </form>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $('.pagination-bottom').bootpag({
+      total: {{ pages }},
+      page: {{ form.vars.value.page }},
+      maxVisible: 20,
+      leaps: true,
+      firstLastUse: true,
+      first: '←',
+      last: '→',
+      wrapClass: 'pagination',
+      activeClass: 'active',
+      disabledClass: 'disabled',
+      nextClass: 'next',
+      prevClass: 'prev',
+      lastClass: 'last',
+      firstClass: 'first'
+    }).on("page", function (event, num) {
+      $('#translation_search_page').val(num);
+      $('#search_translations').submit();
+    });
+  </script>
+{% endblock javascripts %}

@@ -16,21 +16,96 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
   </head>
   <body>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+      <div class="navbar-header">
+        <a href="{{ path('client') }}">
+          <img alt="БиоКонтролер" class="bio-brand" src="{{ asset('bundles/adminclient/images/biocontroler_logo.png') }}">
+        </a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="{{ path('client') }}">Пользователи</a></li>{% endif %}
-          {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="{{ path('db_role') }}">Пользователи БД</a></li>{% endif %}
-          {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="#">История аутентификации</a></li>{% endif %}
-          <li><a href="/logout">Выход</a></li>
+            <li class="{% if app.request.attributes.get('_route') == 'client' %}active{% endif %}">
+              <a href="{{ path('client') }}">Пользователи</a>
+            </li>
+            <li class="{% if app.request.attributes.get('_route') == 'db_role' %}active{% endif %}">
+              <a href="{{ path('db_role') }}">Сайты и роли</a>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Переводы <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="{% if app.request.attributes.get('_route') == 'language' %}active{% endif %}"><a href="{{ path('language') }}">Языки</a></li>
+                <li class="{% if app.request.attributes.get('_route') == 'translation' %}active{% endif %}"><a href="{{ path('translation') }}">Переводы</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Справочники <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Вредители</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'vermin_category' %}active{% endif %}"><a href="{{ path('vermin_category') }}">Категории</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'vermin' %}active{% endif %}"><a href="{{ path('vermin') }}">Справочник</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Энтомофаги</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'entomophage_category' %}active{% endif %}"><a href="{{ path('entomophage_category') }}">Категории</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'entomophage' %}active{% endif %}"><a href="{{ path('entomophage') }}">Справочник</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Производители</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'manufacturer' %}active{% endif %}"><a href="{{ path('manufacturer') }}">Производители</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'provider' %}active{% endif %}"><a href="{{ path('provider') }}">Поставщики</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Химия</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'chemistry_category' %}active{% endif %}"><a href="{{ path('chemistry_category') }}">Категории</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'chemistry' %}active{% endif %}"><a href="{{ path('chemistry') }}">Справочник</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Культуры</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'culture' %}active{% endif %}"><a href="{{ path('culture') }}">Культуры</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'culture_manufacturer' %}active{% endif %}"><a href="{{ path('culture_manufacturer') }}">Производители</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'variety' %}active{% endif %}"><a href="{{ path('variety') }}">Сорта</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Субстраты</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'substrate_category' %}active{% endif %}"><a href="{{ path('substrate_category') }}">Категория</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'substrate_manufacturer' %}active{% endif %}"><a href="{{ path('substrate_manufacturer') }}">Производители</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'substrate' %}active{% endif %}"><a href="{{ path('substrate') }}">Субстраты</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          {% endif %}
         </ul>
-      </div>
-    </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path('logout') }}">Выход</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
   </nav>
+
   <div id="content" class="container">
     {% block body %}{% endblock %}
   </div>
@@ -38,6 +113,7 @@
   '@AdminClientBundle/Resources/public/js/jquery/jquery.min.js'
   '@AdminClientBundle/Resources/public/js/bootstrap/bootstrap.min.js'
   '@AdminClientBundle/Resources/public/js/script.js'
+  '@AdminLanguageBundle/Resources/public/js/script.js'
   output='lscript.js'
   filter='?yui_js' %}
   <script type="text/javascript" src="{{ asset_url }}"></script>

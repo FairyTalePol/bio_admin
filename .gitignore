@@ -21,6 +21,7 @@ app/config/parameters.ini
 app/config/parameters.yml
 app/config/mailparameters.yml
 src/Admin/ClientBundle/Resources/config/config.yml
+/app/config/dynamic_parameters.yml
 
 .idea/*
 composer.lock

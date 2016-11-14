@@ -1,5 +1,6 @@
 imports:
     - { resource: parameters.yml }
+    - { resource: dynamic_parameters.yml }
     - { resource: security.yml }
     - { resource: assets_version.php }
     - { resource: mailparameters.yml }
@@ -18,7 +19,7 @@ framework:
         engines: ['twig']
         assets_version_format: %%s?v=%%s
         assets_base_urls:
-            http: [/compiled]
+            http: [//%domain_name%/compiled]
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -72,34 +73,10 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-#        types:
-#            polygon: Admin\DataBundle\DBAL\Types\PolygonType
-#            geometry: Admin\DataBundle\DBAL\Types\GeometryType
-#            interval: Admin\DataBundle\DBAL\Types\IntervalType
-#        mapping_types:
-#            polygon: string
-#            _polygon: string
-#            geometry: string
-#            _geometry: string
-#            interval: string
-#            _interval: string
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-
-doctrine_mongodb:
-    connections:
-        default:
-            server: mongodb://localhost:27017
-            options: {}
-    default_database: wialon
-    document_managers:
-        default:
-            auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:

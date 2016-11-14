@@ -1,0 +1,55 @@
+catalog_vermin_category:
+    resource: "@AdminCatalogBundle/Controller/VerminCategoryController.php"
+    type:     annotation
+
+catalog_vermin:
+    resource: "@AdminCatalogBundle/Controller/VerminController.php"
+    type:     annotation
+
+catalog_entomophage_category:
+    resource: "@AdminCatalogBundle/Controller/EntomophageCategoryController.php"
+    type:     annotation
+
+catalog_entomophage:
+    resource: "@AdminCatalogBundle/Controller/EntomophageController.php"
+    type:     annotation
+
+catalog_provider:
+    resource: "@AdminCatalogBundle/Controller/ProviderController.php"
+    type:     annotation
+
+catalog_manufacturer:
+    resource: "@AdminCatalogBundle/Controller/ManufacturerController.php"
+    type:     annotation
+
+catalog_chemistry_category:
+    resource: "@AdminCatalogBundle/Controller/ChemistryCategoryController.php"
+    type:     annotation
+
+catalog_chemistry:
+    resource: "@AdminCatalogBundle/Controller/ChemistryController.php"
+    type:     annotation
+
+catalog_culture:
+    resource: "@AdminCatalogBundle/Controller/CultureController.php"
+    type:     annotation
+
+catalog_culture_manufacturer:
+    resource: "@AdminCatalogBundle/Controller/CultureManufacturerController.php"
+    type:     annotation
+
+catalog_variety:
+    resource: "@AdminCatalogBundle/Controller/VarietyController.php"
+    type:     annotation
+
+catalog_substrate_category:
+    resource: "@AdminCatalogBundle/Controller/SubstrateCategoryController.php"
+    type:     annotation
+
+catalog_substrate_manufacturer:
+    resource: "@AdminCatalogBundle/Controller/SubstrateCategoryManufacturerController.php"
+    type:     annotation
+
+catalog_substrate:
+    resource: "@AdminCatalogBundle/Controller/SubstrateController.php"
+    type:     annotation

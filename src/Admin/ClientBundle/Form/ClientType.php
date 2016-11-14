@@ -5,14 +5,14 @@ namespace Admin\ClientBundle\Form;
 use Admin\ClientBundle\Entity\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ClientType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'email', [
+            ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Email'
@@ -20,7 +20,7 @@ class ClientType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
-            ->add('password', 'password', [
+            ->add('password', 'Symfony\Component\Form\Extension\Core\Type\PasswordType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Пароль'
@@ -28,7 +28,7 @@ class ClientType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
-            ->add('db_role', 'entity', [
+            ->add('db_role', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class' => 'Admin\ClientBundle\Entity\DBRole',
                 'property' => 'role',
                 'attr' => [
@@ -38,7 +38,7 @@ class ClientType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
-            ->add('role', 'choice', [
+            ->add('role', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                 'choices' => [
                     Client::ROLE_USER => 'Пользователь',
                     Client::ROLE_ADMIN => 'Администратор',
@@ -53,14 +53,14 @@ class ClientType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Admin\ClientBundle\Entity\Client'
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'admin_clientbundle_clienttype';
     }

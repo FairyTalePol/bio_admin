@@ -1,0 +1,52 @@
+{% extends app.request.isXmlHttpRequest ? 'AdminClientBundle::ajax.html.twig' : is_granted('IS_AUTHENTICATED_FULLY') ? 'AdminClientBundle::layout.html.twig' : 'AdminClientBundle::default.html.twig' %}
+
+{% block body %}
+
+  <table class="table table-responsive table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Категория</th>
+      <th>Производитель</th>
+      <th class="text-center"><a href="{{ path('substrate_manufacturer_add') }}" id="add-vermin-btn" class="btn btn-primary btn-sm">Добавить</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sm in substrate_categories %}
+      <tr>
+        <td>{{ sm.substrateCategory.name }}</td>
+        <td>{{ sm.manufacturer.name }}</td>
+        <td class="text-center">
+          <nobr>
+            <form id="edit-vermin-btn" style="display: inline-block;"
+                  action="{{ path('substrate_category_edit', {id: sm.id}) }}"
+                  enctype="application/x-www-form-urlencoded" method="get">
+              <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
+            </form>&nbsp;
+            <form style="display: inline-block;" action="{{ path('substrate_category_delete', {id: sm.id}) }}"
+                  enctype="application/x-www-form-urlencoded" method="get">
+              <button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+            </form>
+          </nobr>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div id="modal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+{% endblock %}

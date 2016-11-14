@@ -1,0 +1,55 @@
+{% extends app.request.isXmlHttpRequest ? 'AdminClientBundle::ajax.html.twig' : app.user and is_granted('IS_AUTHENTICATED_FULLY') ? 'AdminClientBundle::layout.html.twig' : 'AdminClientBundle::default.html.twig' %}
+
+{% block body %}
+
+  <div style="text-align: center;">Язык: {{ language.name }}</div>
+  <br/>
+  {% if form.vars.valid  and app.request.method == 'POST' %}
+  <script type="text/javascript">
+    document.location.reload();
+  </script>
+  {% else %}
+  {% if form.vars.value.id is not null %}
+  <form id="edit-translation-form"
+        action="{{ path('translation_update', { id: form.vars.value.id }) }}"
+        method="post" enctype="application/x-www-form-urlencoded"
+        style="height: 300px;"
+  >
+    {% else %}
+    <form id="edit-translation-form" action="{{ path('translation_create', {language_id: language.id}) }}" method="post"
+          enctype="application/x-www-form-urlencoded"
+          style="height: 300px;"
+    >
+      {% endif %}
+      <div class="form-group col-sm-12">
+        <label class="col-sm-3 control-label">Термин</label>
+
+        <div class="col-sm-9">
+          {{ form_widget(form.term_name) }}
+        </div>
+      </div>
+      <div class="form-group col-sm-12">
+        <label class="col-sm-3 control-label">Перевод</label>
+
+        <div class="col-sm-9">
+          {{ form_widget(form.value) }}
+        </div>
+      </div>
+      {{ form_rest(form) }}
+      <div class="form-group">
+        <div class="text-center">
+          {% if form.vars.value.id is null %}
+            <button type="submit" class="btn btn-default">Добавить</button>
+          {% else %}
+            <button type="submit" class="btn btn-default">Сохранить</button>
+          {% endif %}
+        </div>
+      </div>
+    </form>
+    {% if not form.vars.valid %}
+      <div class="alert alert-danger">
+        {{ form_errors(form) }}
+      </div>
+    {% endif %}
+    {% endif %}
+{% endblock %}
