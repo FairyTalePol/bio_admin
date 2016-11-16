@@ -28,7 +28,12 @@
             {{ vermin.name }} {% if entomophage.vermins|length > 1 %}<br>{% endif %}
           {% endfor %}
         </td>
-        <td>{{ entomophage.image }}</td>
+        <td>{% if entomophage.image %}
+            <a href="/compiled/bundles/admincatalog/images/entomophages/original/{{ entomophage.image }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/entomophages/logo/{{ entomophage.image }}" alt="Фото">
+            </a>
+          {% endif %}
+        </td>
         <td class="text-center">
           <nobr>
             <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('entomophage_edit', {id: entomophage.id}) }}" enctype="application/x-www-form-urlencoded" method="get">

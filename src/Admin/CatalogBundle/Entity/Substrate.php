@@ -15,10 +15,16 @@ class Substrate extends ImageBase
 {
     protected static $img_dir = 'substrates';
 
+    public static $logo_size = [
+        'width' => 95,
+        'height' => 40
+    ];
+
     const SUBSTRATE_TYPE_KUB = 'SUBSTRATE_TYPE_CUBE';
     const SUBSTRATE_TYPE_MAT = 'SUBSTRATE_TYPE_MAT';
     const SUBSTRATE_TYPE_DISK = 'SUBSTRATE_TYPE_DISK';
     const SUBSTRATE_TYPE_BLOCK = 'SUBSTRATE_TYPE_BLOCK';
+
     /**
      * @var integer
      *

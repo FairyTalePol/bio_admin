@@ -2,6 +2,7 @@
 
 namespace Admin\CatalogBundle\Form;
 
+use Admin\CatalogBundle\Entity\ImageBase;
 use Admin\CatalogBundle\Entity\Substrate;
 use Admin\CatalogBundle\Entity\Manufacturer;
 use Symfony\Component\Form\AbstractType;
@@ -65,13 +66,16 @@ class SubstrateType extends AbstractType
             ])
             ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'required' => false,
-                'mapped' => false
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'form-control attachment_data',
+                ],
             ])
             ->add('attachment');
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-            /** @var Manufacturer $manufacturer */
-            $manufacturer = $event->getData();
+            /** @var ImageBase $imageBase */
+            $imageBase = $event->getData();
             $form = $event->getForm();
 
             $imgContent = $form->get('attachment_data')->getData();
@@ -80,10 +84,10 @@ class SubstrateType extends AbstractType
             $imgContent = base64_decode($imgContent);
 
             if ($imgContent) {
-                $fPath = '/tmp/' . uniqid();
+                $fPath = '/tmp/' . uniqid(rand(0, 9999), true);
                 file_put_contents($fPath, $imgContent);
                 $attachment = new File($fPath);
-                $manufacturer->setAttachment($attachment);
+                $imageBase->setAttachment($attachment);
             }
         });
     }

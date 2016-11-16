@@ -2,6 +2,7 @@
 
 namespace Admin\CatalogBundle\Form;
 
+use Admin\CatalogBundle\Entity\ImageBase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -73,7 +74,7 @@ class VerminType extends AbstractType
             ])
             ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control attachment_data',
                 ],
                 'required' => false,
                 'mapped' => false
@@ -89,8 +90,8 @@ class VerminType extends AbstractType
             ->add('attachment');
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-            /** @var Manufacturer $manufacturer */
-            $manufacturer = $event->getData();
+            /** @var ImageBase $imageBase */
+            $imageBase = $event->getData();
             $form = $event->getForm();
 
             $imgContent = $form->get('attachment_data')->getData();
@@ -99,10 +100,10 @@ class VerminType extends AbstractType
             $imgContent = base64_decode($imgContent);
 
             if ($imgContent) {
-                $fPath = '/tmp/' . uniqid();
+                $fPath = '/tmp/' . uniqid(rand(0, 9999), true);
                 file_put_contents($fPath, $imgContent);
                 $attachment = new File($fPath);
-                $manufacturer->setAttachment($attachment);
+                $imageBase->setAttachment($attachment);
             }
         });
     }

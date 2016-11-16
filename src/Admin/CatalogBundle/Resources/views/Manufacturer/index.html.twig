@@ -24,7 +24,12 @@
       <tr>
         <td>{{ manufacturer.name }}</td>
         <td>{{ manufacturer_type[manufacturer.manufacturerType] }}</td>
-        <td>{{ manufacturer.image }}</td>
+        <td>{% if manufacturer.image %}
+            <a href="/compiled/bundles/admincatalog/images/manufacturers/original/{{ manufacturer.image }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/manufacturers/logo/{{ manufacturer.image }}" alt="Фото">
+            </a>
+          {% endif %}
+        </td>
         <td class="text-center">
           <nobr>
             <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('manufacturer_edit', {id: manufacturer.id}) }}" enctype="application/x-www-form-urlencoded" method="get">

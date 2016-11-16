@@ -29,7 +29,12 @@
         <td>{{ substrate.description }}</td>
         <td>{{ substrate.size }}</td>
         <td>{{ substrate_type[substrate.substrateType] }}</td>
-        <td>{{ substrate.image }}</td>
+        <td>{% if substrate.image %}
+            <a href="/compiled/bundles/admincatalog/images/substrates/original/{{ substrate.image }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/substrates/logo/{{ substrate.image }}" alt="Фото">
+            </a>
+          {% endif %}
+        </td>
         <td class="text-center">
           <nobr>
             <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('substrate_edit', {id: substrate.id}) }}" enctype="application/x-www-form-urlencoded" method="get">

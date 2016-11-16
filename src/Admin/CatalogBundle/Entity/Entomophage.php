@@ -18,13 +18,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
  */
 class Entomophage extends ImageBase
 {
-
     protected static $img_dir = 'entomophages';
-
-    public static $logo_size = [
-        'width' => 60,
-        'height' => 60
-    ];
 
     /**
      * @var integer

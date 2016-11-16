@@ -146,7 +146,7 @@ class DBRoleController extends DefaultController
             } else {
                 $em->persist($dbRole);
                 /** @var PDOStatement $stmt */
-                $stmt = $con->prepare("CREATE ROLE {$dbRole->getRole()} WITH LOGIN IN ROLE farming_group PASSWORD '{$dbRole->getPassword()}'");
+                $stmt = $con->prepare("CREATE ROLE {$dbRole->getRole()} WITH LOGIN IN ROLE bio_group PASSWORD '{$dbRole->getPassword()}'");
                 $stmt->execute();
                 $stmt = $con->prepare("CREATE SCHEMA {$dbRole->getRole()}");
                 $stmt->execute();

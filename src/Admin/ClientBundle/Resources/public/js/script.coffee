@@ -1,4 +1,16 @@
 $(document).ready () ->
+  $(document).on 'change', '[type=file]', (e) ->
+    input = e.currentTarget
+    attachment_data = $('.attachment_data')
+    file = input.files[0]
+
+    fReader = new FileReader()
+    fReader.onload = ((theFile, that)->
+      (e) ->
+        attachment_data.val(e.target.result)
+    )(file, attachment_data)
+    fReader.readAsDataURL file
+
   $(document).on 'click', '#add-client-btn', (e) ->
     e.preventDefault()
 

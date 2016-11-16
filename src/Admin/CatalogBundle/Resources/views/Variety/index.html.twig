@@ -24,7 +24,12 @@
         <td>{{ variety.form }}</td>
         <td>{{ variety.color }}</td>
         <td>{{ variety.cultureManufacturer.manufacturer.name }}</td>
-        <td>{{ variety.image }}</td>
+        <td>{% if variety.image %}
+            <a href="/compiled/bundles/admincatalog/images/varieties/original/{{ variety.image }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/varieties/logo/{{ variety.image }}" alt="Фото">
+            </a>
+          {% endif %}
+        </td>
         <td class="text-center">
           <nobr>
             <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('variety_edit', {id: variety.id}) }}" enctype="application/x-www-form-urlencoded" method="get">

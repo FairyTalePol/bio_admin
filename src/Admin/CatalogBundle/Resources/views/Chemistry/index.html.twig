@@ -36,7 +36,12 @@
             {{ manufacturer.name }} {% if chemistry.manufacturers|length > 1 %}<br>{% endif %}
           {% endfor %}
         </td>
-        <td>{{ chemistry.image }}</td>
+        <td>{% if chemistry.image %}
+            <a href="/compiled/bundles/admincatalog/images/chemistry/original/{{ chemistry.image }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/chemistry/logo/{{ chemistry.image }}" alt="Фото">
+            </a>
+          {% endif %}
+        </td>
         <td class="text-center">
           <nobr>
             <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('chemistry_edit', {id: chemistry.id}) }}" enctype="application/x-www-form-urlencoded" method="get">

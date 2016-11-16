@@ -2,6 +2,7 @@
 
 namespace Admin\CatalogBundle\Form;
 
+use Admin\CatalogBundle\Entity\ImageBase;
 use Admin\CatalogBundle\Entity\Manufacturer;
 use Admin\CatalogBundle\Entity\ManufacturerRepository;
 use Symfony\Component\Form\AbstractType;
@@ -91,7 +92,7 @@ class ChemistryType extends AbstractType
             ])
             ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control attachment_data',
                 ],
                 'required' => false,
                 'mapped' => false
@@ -99,8 +100,8 @@ class ChemistryType extends AbstractType
             ->add('attachment');
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-            /** @var Manufacturer $manufacturer */
-            $manufacturer = $event->getData();
+            /** @var ImageBase $imageBase */
+            $imageBase = $event->getData();
             $form = $event->getForm();
 
             $imgContent = $form->get('attachment_data')->getData();
@@ -109,10 +110,10 @@ class ChemistryType extends AbstractType
             $imgContent = base64_decode($imgContent);
 
             if ($imgContent) {
-                $fPath = '/tmp/' . uniqid();
+                $fPath = '/tmp/' . uniqid(rand(0, 9999), true);
                 file_put_contents($fPath, $imgContent);
                 $attachment = new File($fPath);
-                $manufacturer->setAttachment($attachment);
+                $imageBase->setAttachment($attachment);
             }
         });
     }

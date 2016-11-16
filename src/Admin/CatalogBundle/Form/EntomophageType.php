@@ -65,14 +65,17 @@ class EntomophageType extends AbstractType
                 'required' => true
             ])
             ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control attachment_data',
+                ],
                 'required' => false,
                 'mapped' => false
             ])
             ->add('attachment');
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-            /** @var ImageBase $entity */
-            $entity = $event->getData();
+            /** @var ImageBase $imageBase */
+            $imageBase = $event->getData();
             $form = $event->getForm();
 
             $imgContent = $form->get('attachment_data')->getData();
@@ -81,10 +84,10 @@ class EntomophageType extends AbstractType
             $imgContent = base64_decode($imgContent);
 
             if ($imgContent) {
-                $fPath = '/tmp/' . uniqid();
+                $fPath = '/tmp/' . uniqid(rand(0, 9999), true);
                 file_put_contents($fPath, $imgContent);
                 $attachment = new File($fPath);
-                $entity->setAttachment($attachment);
+                $imageBase->setAttachment($attachment);
             }
         });
     }

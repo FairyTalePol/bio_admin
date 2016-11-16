@@ -46,7 +46,7 @@ class Version20161115113448 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        $this->addSql('REVOKE ALL ON FUNCTION get_translations() FROM GROUP farming_group;');
+        $this->addSql('REVOKE ALL ON FUNCTION get_translations() FROM GROUP bio_group;');
 
         $this->addSql('DROP FUNCTION IF EXISTS get_translations()');
     }

@@ -62,14 +62,6 @@
                 </li>
 
                 <li class="dropdown-submenu">
-                  <a tabindex="-1" href="#">Производители</a>
-                  <ul class="dropdown-menu">
-                    <li class="{% if app.request.attributes.get('_route') == 'manufacturer' %}active{% endif %}"><a href="{{ path('manufacturer') }}">Производители</a></li>
-                    <li class="{% if app.request.attributes.get('_route') == 'provider' %}active{% endif %}"><a href="{{ path('provider') }}">Поставщики</a></li>
-                  </ul>
-                </li>
-
-                <li class="dropdown-submenu">
                   <a tabindex="-1" href="#">Химия</a>
                   <ul class="dropdown-menu">
                     <li class="{% if app.request.attributes.get('_route') == 'chemistry_category' %}active{% endif %}"><a href="{{ path('chemistry_category') }}">Категории</a></li>
@@ -92,6 +84,14 @@
                     <li class="{% if app.request.attributes.get('_route') == 'substrate_category' %}active{% endif %}"><a href="{{ path('substrate_category') }}">Категория</a></li>
                     <li class="{% if app.request.attributes.get('_route') == 'substrate_manufacturer' %}active{% endif %}"><a href="{{ path('substrate_manufacturer') }}">Производители</a></li>
                     <li class="{% if app.request.attributes.get('_route') == 'substrate' %}active{% endif %}"><a href="{{ path('substrate') }}">Субстраты</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Производители</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'manufacturer' %}active{% endif %}"><a href="{{ path('manufacturer') }}">Производители</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'provider' %}active{% endif %}"><a href="{{ path('provider') }}">Поставщики</a></li>
                   </ul>
                 </li>
               </ul>

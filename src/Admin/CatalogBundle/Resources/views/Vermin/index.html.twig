@@ -28,7 +28,12 @@
         <td>{{ vermin.disDescription3 }}</td>
         <td>{{ vermin.disDescription4 }}</td>
         <td>{{ vermin.disDescription5 }}</td>
-        <td>{{ vermin.image }}</td>
+        <td>{% if vermin.image %}
+            <a href="/compiled/bundles/admincatalog/images/vermin/original/{{ vermin.image }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/vermin/logo/{{ vermin.image }}" alt="Фото">
+            </a>
+          {% endif %}
+        </td>
         <td class="text-center">
           <nobr>
             <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('vermin_edit', {id: vermin.id}) }}" enctype="application/x-www-form-urlencoded" method="get">
