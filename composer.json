@@ -24,8 +24,6 @@
     "doctrine/doctrine-cache-bundle": "~1.0",
     "doctrine/migrations": "dev-master",
     "doctrine/doctrine-migrations-bundle": "dev-master",
-    "doctrine/mongodb-odm": "*",
-    "doctrine/mongodb-odm-bundle": "*",
     "symfony/process": "~2.0",
     "symfony/serializer": "~3.0"
   },
