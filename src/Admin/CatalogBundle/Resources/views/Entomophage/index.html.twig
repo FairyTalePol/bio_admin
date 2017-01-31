@@ -11,6 +11,7 @@
       <th>Норма внесения в очагах</th>
       <th>Норма внесения превентивно</th>
       <th>Вредители</th>
+      <th>Производители</th>
       <th>Фото</th>
       <th class="text-center"><a href="{{ path('entomophage_add') }}" id="add-vermin-btn" class="btn btn-primary btn-sm">Добавить</a></th>
     </tr>
@@ -26,6 +27,11 @@
         <td>
           {% for vermin in entomophage.vermins %}
             {{ vermin.name }} {% if entomophage.vermins|length > 1 %}<br>{% endif %}
+          {% endfor %}
+        </td>
+        <td>
+          {% for manufacturer in entomophage.manufacturers %}
+            {{ manufacturer.name }} {% if entomophage.manufacturers|length > 1 %}<br>{% endif %}
           {% endfor %}
         </td>
         <td>{% if entomophage.image %}

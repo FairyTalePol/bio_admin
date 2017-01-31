@@ -79,6 +79,13 @@ class Manufacturer extends ImageBase
     /**
      * @var ArrayCollection
      *
+     * @ORM\ManyToMany(targetEntity="Admin\CatalogBundle\Entity\Entomophage", mappedBy="manufacturers")
+     */
+    private $entomophages;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Admin\CatalogBundle\Entity\SubstrateCategoryManufacturer", mappedBy="manufacturer")
      */
     private $substrate_category_manufacturers;
@@ -194,6 +201,24 @@ class Manufacturer extends ImageBase
     public function setChemistry($chemistry)
     {
         $this->chemistry = $chemistry;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getEntomophages()
+    {
+        return $this->entomophages;
+    }
+
+    /**
+     * @param ArrayCollection $entomophages
+     * @return Manufacturer
+     */
+    public function setEntomophages($entomophages)
+    {
+        $this->entomophages = $entomophages;
         return $this;
     }
 

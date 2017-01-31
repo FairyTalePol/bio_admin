@@ -76,6 +76,17 @@ class Entomophage extends ImageBase
     private $category;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Admin\CatalogBundle\Entity\Manufacturer", inversedBy="entomophages")
+     * @ORM\JoinTable(name="entomophages_manufacturers",
+     *      joinColumns={@ORM\JoinColumn(name="entomophage_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $manufacturers;
+
+    /**
      * @return int
      */
     public function getId()
@@ -198,6 +209,24 @@ class Entomophage extends ImageBase
     public function setCategory($category)
     {
         $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getManufacturers()
+    {
+        return $this->manufacturers;
+    }
+
+    /**
+     * @param ArrayCollection $manufacturers
+     * @return Entomophage
+     */
+    public function setManufacturers($manufacturers)
+    {
+        $this->manufacturers = $manufacturers;
         return $this;
     }
 
