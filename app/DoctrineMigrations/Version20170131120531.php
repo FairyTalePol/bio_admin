@@ -19,7 +19,7 @@ class Version20170131120531 extends AbstractMigration
         $this->addSql('GRANT SELECT ON TABLE public.entomophages_categories TO bio_group, farming_group;');
         $this->addSql('GRANT SELECT ON TABLE public.entomophages TO bio_group, farming_group;');
         $this->addSql('GRANT SELECT ON TABLE public.entomophagies_vermins TO bio_group, farming_group;');
-        $this->addSql('GRANT SELECT ON TABLE public.entomophages_manufacturers TO bio_group, farming_group;');
+
         $this->addSql('GRANT SELECT ON TABLE public.manufacturers TO bio_group, farming_group;');
         $this->addSql('GRANT SELECT ON SEQUENCE public.entomophages_categories_id_seq TO bio_group, farming_group;');
         $this->addSql('GRANT SELECT ON SEQUENCE public.entomophages_id_seq TO bio_group, farming_group;');
@@ -36,7 +36,7 @@ class Version20170131120531 extends AbstractMigration
         $this->addSql('REVOKE SELECT ON TABLE public.entomophages_categories FROM bio_group, farming_group;');
         $this->addSql('REVOKE SELECT ON TABLE public.entomophages FROM bio_group, farming_group;');
         $this->addSql('REVOKE SELECT ON TABLE public.entomophagies_vermins FROM bio_group, farming_group;');
-        $this->addSql('REVOKE SELECT ON TABLE public.entomophages_manufacturers FROM bio_group, farming_group;');
+
         $this->addSql('REVOKE SELECT ON TABLE public.manufacturers FROM bio_group, farming_group;');
         $this->addSql('REVOKE SELECT ON SEQUENCE public.entomophages_categories_id_seq FROM bio_group, farming_group;');
         $this->addSql('REVOKE SELECT ON SEQUENCE public.entomophages_id_seq FROM bio_group, farming_group;');
