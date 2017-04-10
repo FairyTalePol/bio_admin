@@ -3,8 +3,6 @@
 namespace Admin\CatalogBundle\Form;
 
 use Admin\CatalogBundle\Entity\ImageBase;
-use Admin\CatalogBundle\Entity\Manufacturer;
-use Admin\CatalogBundle\Entity\ManufacturerRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -12,7 +10,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ChemistryType extends AbstractType
+class BlightType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,22 +23,6 @@ class ChemistryType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
-            ->add('norm', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Концентрация препарата'
-                ],
-                'required' => true,
-                'error_bubbling' => true
-            ])
-            ->add('substance', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Действующее вещество'
-                ],
-                'required' => true,
-                'error_bubbling' => true
-            ])
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
@@ -49,55 +31,45 @@ class ChemistryType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
-            ->add('prophylaxy')
-            ->add('volume', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ->add('dis_description1', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Объем'
+                    'placeholder' => 'Порог вредности'
                 ],
-                'required' => true,
+                'required' => false,
                 'error_bubbling' => true
             ])
-            ->add('vermins', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                'class' => 'Admin\CatalogBundle\Entity\Vermin',
+            ->add('dis_description2', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Порог вредности'
                 ],
-                'choice_label' => 'name',
-                'multiple' => true,
-                'required' => false
+                'required' => false,
+                'error_bubbling' => true
             ])
-            ->add('blights', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                'class' => 'Admin\CatalogBundle\Entity\Blight',
+            ->add('dis_description3', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Порог вредности'
                 ],
-                'choice_label' => 'name',
-                'multiple' => true,
-                'required' => false
+                'required' => false,
+                'error_bubbling' => true
             ])
-            ->add('manufacturers', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                'class' => 'Admin\CatalogBundle\Entity\Manufacturer',
-                'query_builder' => function (ManufacturerRepository $repo) {
-                    return $repo->createQueryBuilder('m')
-                        ->orderBy('m.name', 'ASC')
-                        ->where('m.manufacturer_type = :manufacturer_type')
-                        ->setParameter('manufacturer_type', Manufacturer::MANUFACTURER_TYPE_CHEMISTRY);
-                },
+            ->add('dis_description4', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Порог вредности'
                 ],
-                'choice_label' => 'name',
-                'multiple' => true,
-                'required' => false
+                'required' => false,
+                'error_bubbling' => true
             ])
-            ->add('category', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                'class' => 'Admin\CatalogBundle\Entity\ChemistryCategory',
+            ->add('dis_description5', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Порог вредности'
                 ],
-                'choice_label' => 'name',
-                'required' => true
+                'required' => false,
+                'error_bubbling' => true
             ])
             ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
@@ -105,6 +77,14 @@ class ChemistryType extends AbstractType
                 ],
                 'required' => false,
                 'mapped' => false
+            ])
+            ->add('category', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'class' => 'Admin\CatalogBundle\Entity\BlightCategory',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'choice_label' => 'name',
+                'required' => true
             ])
             ->add('attachment');
 
@@ -141,6 +121,6 @@ class ChemistryType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'chemistry';
+        return 'blight';
     }
 }

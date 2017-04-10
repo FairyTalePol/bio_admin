@@ -117,4 +117,20 @@ class DefaultController extends Controller
     {
         return $this->getDoctrine()->getRepository('AdminCatalogBundle:Substrate');
     }
+
+    /**
+     * @return \Admin\CatalogBundle\Entity\BlightRepository
+     */
+    public function getBlightRepository()
+    {
+        return $this->getDoctrine()->getRepository('AdminCatalogBundle:Blight');
+    }
+
+    /**
+     * @return \Admin\CatalogBundle\Entity\BlightCategoryRepository
+     */
+    public function getBlightCategoryRepository()
+    {
+        return $this->getDoctrine()->getRepository('AdminCatalogBundle:BlightCategory');
+    }
 }

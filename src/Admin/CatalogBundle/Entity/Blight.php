@@ -1,0 +1,277 @@
+<?php
+
+namespace Admin\CatalogBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+
+/**
+ * Class blight
+ * @ORM\Table(name="blights", uniqueConstraints={@UniqueConstraint(name="blight_name", columns={"name"})})
+ * @ORM\Entity(repositoryClass="Admin\CatalogBundle\Entity\BlightRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(errorPath="name", fields={"name"})
+ */
+class Blight extends ImageBase {
+
+    protected static $img_dir = 'blight';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", unique=true, nullable=false)
+     * @Assert\NotNull()
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", unique=false, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description1", type="text", unique=false, nullable=true)
+     */
+    private $dis_description1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description2", type="text", unique=false, nullable=true)
+     */
+    private $dis_description2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description3", type="text", unique=false, nullable=true)
+     */
+    private $dis_description3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description4", type="text", unique=false, nullable=true)
+     */
+    private $dis_description4;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description5", type="text", unique=false, nullable=true)
+     */
+    private $dis_description5;
+
+    /**
+     * @var BlightCategory
+     *
+     * @ORM\ManyToOne(targetEntity="Admin\CatalogBundle\Entity\BlightCategory", inversedBy="blights")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @Assert\NotNull()
+     */
+    private $category;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Admin\CatalogBundle\Entity\Chemistry", mappedBy="blights")
+     */
+    private $chemistry;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Blight
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Blight
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Blight
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription1()
+    {
+        return $this->dis_description1;
+    }
+
+    /**
+     * @param string $dis_description1
+     * @return Blight
+     */
+    public function setDisDescription1($dis_description1)
+    {
+        $this->dis_description1 = $dis_description1;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription2()
+    {
+        return $this->dis_description2;
+    }
+
+    /**
+     * @param string $dis_description2
+     * @return Blight
+     */
+    public function setDisDescription2($dis_description2)
+    {
+        $this->dis_description2 = $dis_description2;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription3()
+    {
+        return $this->dis_description3;
+    }
+
+    /**
+     * @param string $dis_description3
+     * @return Blight
+     */
+    public function setDisDescription3($dis_description3)
+    {
+        $this->dis_description3 = $dis_description3;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription4()
+    {
+        return $this->dis_description4;
+    }
+
+    /**
+     * @param string $dis_description4
+     * @return Blight
+     */
+    public function setDisDescription4($dis_description4)
+    {
+        $this->dis_description4 = $dis_description4;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription5()
+    {
+        return $this->dis_description5;
+    }
+
+    /**
+     * @param string $dis_description5
+     * @return Blight
+     */
+    public function setDisDescription5($dis_description5)
+    {
+        $this->dis_description5 = $dis_description5;
+        return $this;
+    }
+
+    /**
+     * @return BlightCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param BlightCategory $category
+     * @return Blight
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getChemistry()
+    {
+        return $this->chemistry;
+    }
+
+    /**
+     * @param ArrayCollection $chemistry
+     * @return Blight
+     */
+    public function setChemistry($chemistry)
+    {
+        $this->chemistry = $chemistry;
+        return $this;
+    }
+
+}

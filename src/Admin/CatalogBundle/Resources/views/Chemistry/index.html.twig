@@ -12,6 +12,7 @@
       <th>Объем</th>
       <th>Конц. препарата</th>
       <th>Вредители</th>
+      <th>Болезни</th>
       <th>Производители</th>
       <th>Фото</th>
       <th class="text-center"><a href="{{ path('chemistry_add') }}" id="add-vermin-btn" class="btn btn-primary btn-sm">Добавить</a></th>
@@ -29,6 +30,11 @@
         <td>
           {% for vermin in chemistry.vermins %}
             {{ vermin.name ~ ';' }} {% if chemistry.vermins|length > 1 %}<br>{% endif %}
+          {% endfor %}
+        </td>
+        <td>
+          {% for blight in chemistry.blights %}
+            {{ blight.name ~ ';' }} {% if blight.vermins|length > 1 %}<br>{% endif %}
           {% endfor %}
         </td>
         <td>

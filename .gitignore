@@ -67,3 +67,10 @@ src/Admin/CatalogBundle/Resources/public/images/vermin/logo/*
 !src/Admin/CatalogBundle/Resources/public/images/vermin/logo/.gitkeep
 src/Admin/CatalogBundle/Resources/public/images/vermin/original/*
 !src/Admin/CatalogBundle/Resources/public/images/vermin/original/.gitkeep
+
+src/Admin/CatalogBundle/Resources/public/images/blight/full/*
+!src/Admin/CatalogBundle/Resources/public/images/blight/full/.gitkeep
+src/Admin/CatalogBundle/Resources/public/images/blight/logo/*
+!src/Admin/CatalogBundle/Resources/public/images/blight/logo/.gitkeep
+src/Admin/CatalogBundle/Resources/public/images/blight/original/*
+!src/Admin/CatalogBundle/Resources/public/images/blight/original/.gitkeep

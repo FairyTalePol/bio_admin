@@ -85,6 +85,14 @@ class Chemistry extends ImageBase {
     private $vermins;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Admin\CatalogBundle\Entity\Blight", inversedBy="chemistry")
+     * @ORM\JoinTable(name="chemistry_blights")
+     */
+    private $blights;
+
+    /**
      * @var ChemistryCategory
      *
      * @ORM\ManyToOne(targetEntity="Admin\CatalogBundle\Entity\ChemistryCategory", inversedBy="chemistry")
@@ -281,6 +289,24 @@ class Chemistry extends ImageBase {
     public function setManufacturers($manufacturers)
     {
         $this->manufacturers = $manufacturers;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBlights()
+    {
+        return $this->blights;
+    }
+
+    /**
+     * @param ArrayCollection $blights
+     * @return Chemistry
+     */
+    public function setBlights($blights)
+    {
+        $this->blights = $blights;
         return $this;
     }
 

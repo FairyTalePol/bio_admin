@@ -53,3 +53,11 @@ catalog_substrate_manufacturer:
 catalog_substrate:
     resource: "@AdminCatalogBundle/Controller/SubstrateController.php"
     type:     annotation
+
+catalog_blight_category:
+    resource: "@AdminCatalogBundle/Controller/BlightCategoryController.php"
+    type:     annotation
+
+catalog_blight:
+    resource: "@AdminCatalogBundle/Controller/BlightController.php"
+    type:     annotation

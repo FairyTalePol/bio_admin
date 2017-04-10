@@ -88,6 +88,14 @@
                 </li>
 
                 <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#">Болезни</a>
+                  <ul class="dropdown-menu">
+                    <li class="{% if app.request.attributes.get('_route') == 'blight_category' %}active{% endif %}"><a href="{{ path('blight_category') }}">Категории</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'blight' %}active{% endif %}"><a href="{{ path('blight') }}">Справочник</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
                   <a tabindex="-1" href="#">Производители</a>
                   <ul class="dropdown-menu">
                     <li class="{% if app.request.attributes.get('_route') == 'manufacturer' %}active{% endif %}"><a href="{{ path('manufacturer') }}">Производители</a></li>
