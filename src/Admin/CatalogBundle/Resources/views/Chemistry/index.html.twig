@@ -34,7 +34,7 @@
         </td>
         <td>
           {% for blight in chemistry.blights %}
-            {{ blight.name ~ ';' }} {% if blight.vermins|length > 1 %}<br>{% endif %}
+            {{ blight.name ~ ';' }} {% if chemistry.blights|length > 1 %}<br>{% endif %}
           {% endfor %}
         </td>
         <td>
