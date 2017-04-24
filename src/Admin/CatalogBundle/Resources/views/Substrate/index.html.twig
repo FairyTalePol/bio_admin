@@ -29,9 +29,25 @@
         <td>{{ substrate.description }}</td>
         <td>{{ substrate.size }}</td>
         <td>{{ substrate_type[substrate.substrateType] }}</td>
+        <td>{{ substrate.video }}</td>
         <td>{% if substrate.image %}
             <a href="/compiled/bundles/admincatalog/images/substrates/original/{{ substrate.image }}" target="_blank">
               <img src="/compiled/bundles/admincatalog/images/substrates/logo/{{ substrate.image }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if substrate.image2 %}
+            <a href="/compiled/bundles/admincatalog/images/substrates/original/{{ substrate.image2 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/substrates/logo/{{ substrate.image2 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if substrate.image3 %}
+            <a href="/compiled/bundles/admincatalog/images/substrates/original/{{ substrate.image3 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/substrates/logo/{{ substrate.image3 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if substrate.image4 %}
+            <a href="/compiled/bundles/admincatalog/images/substrates/original/{{ substrate.image4 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/substrates/logo/{{ substrate.image4 }}" alt="Фото">
             </a>
           {% endif %}
         </td>

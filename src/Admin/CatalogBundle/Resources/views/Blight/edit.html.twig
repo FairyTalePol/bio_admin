@@ -69,17 +69,30 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label">Фото</label>
+      <label for="inputEmail3" class="col-sm-2 control-label">Видео</label>
 
       <div class="col-sm-10">
-        {{ form_widget(form.attachment) }}
+        {{ form_widget(form.video) }}
       </div>
     </div>
-    <div class="form-group hide">
+    <div class="form-group">
       <label for="inputEmail3" class="col-sm-2 control-label">Фото</label>
 
-      <div class="col-sm-10">
-        {{ form_widget(form.attachment_data) }}
+      <div class="col-sm-4">
+        {{ form_widget(form.attachment) }}
+        <div class="hide">{{ form_widget(form.attachment_data) }}</div>
+      </div>
+      <div class="col-sm-4">
+        {{ form_widget(form.attachment2) }}
+        <div class="hide">{{ form_widget(form.attachment_data2) }}</div>
+      </div>
+      <div class="col-sm-4">
+        {{ form_widget(form.attachment3) }}
+        <div class="hide">{{ form_widget(form.attachment_data3) }}</div>
+      </div>
+      <div class="col-sm-4">
+        {{ form_widget(form.attachment4) }}
+        <div class="hide">{{ form_widget(form.attachment_data4) }}</div>
       </div>
     </div>
 

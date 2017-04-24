@@ -1,7 +1,8 @@
 $(document).ready () ->
   $(document).on 'change', '[type=file]', (e) ->
     input = e.currentTarget
-    attachment_data = $('.attachment_data')
+    id = $(input).attr('id')
+    attachment_data = $('.' + id)
     file = input.files[0]
 
     fReader = new FileReader()

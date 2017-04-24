@@ -14,6 +14,8 @@
       <th>Вредители</th>
       <th>Болезни</th>
       <th>Производители</th>
+      <th>Видео</th>
+      <th>Видео</th>
       <th>Фото</th>
       <th class="text-center"><a href="{{ path('chemistry_add') }}" id="add-vermin-btn" class="btn btn-primary btn-sm">Добавить</a></th>
     </tr>
@@ -42,9 +44,25 @@
             {{ manufacturer.name }} {% if chemistry.manufacturers|length > 1 %}<br>{% endif %}
           {% endfor %}
         </td>
+        <td>{{ chemistry.video }}</td>
         <td>{% if chemistry.image %}
             <a href="/compiled/bundles/admincatalog/images/chemistry/original/{{ chemistry.image }}" target="_blank">
               <img src="/compiled/bundles/admincatalog/images/chemistry/logo/{{ chemistry.image }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if chemistry.image2 %}
+            <a href="/compiled/bundles/admincatalog/images/chemistry/original/{{ chemistry.image2 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/chemistry/logo/{{ chemistry.image2 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if chemistry.image3 %}
+            <a href="/compiled/bundles/admincatalog/images/chemistry/original/{{ chemistry.image3 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/chemistry/logo/{{ chemistry.image3 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if chemistry.image4 %}
+            <a href="/compiled/bundles/admincatalog/images/chemistry/original/{{ chemistry.image3 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/chemistry/logo/{{ chemistry.image3 }}" alt="Фото">
             </a>
           {% endif %}
         </td>

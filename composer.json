@@ -25,7 +25,8 @@
     "doctrine/migrations": "dev-master",
     "doctrine/doctrine-migrations-bundle": "dev-master",
     "symfony/process": "~2.0",
-    "symfony/serializer": "~3.0"
+    "symfony/serializer": "~3.0",
+    "twig/twig": "<2.0"
   },
   "scripts": {
     "post-install-cmd": [

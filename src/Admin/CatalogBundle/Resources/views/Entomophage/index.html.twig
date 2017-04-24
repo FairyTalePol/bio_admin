@@ -12,6 +12,7 @@
       <th>Норма внесения превентивно</th>
       <th>Вредители</th>
       <th>Производители</th>
+      <th>Видео</th>
       <th>Фото</th>
       <th class="text-center"><a href="{{ path('entomophage_add') }}" id="add-vermin-btn" class="btn btn-primary btn-sm">Добавить</a></th>
     </tr>
@@ -34,9 +35,25 @@
             {{ manufacturer.name }} {% if entomophage.manufacturers|length > 1 %}<br>{% endif %}
           {% endfor %}
         </td>
+        <td>{{ entomophage.video }}</td>
         <td>{% if entomophage.image %}
             <a href="/compiled/bundles/admincatalog/images/entomophages/original/{{ entomophage.image }}" target="_blank">
               <img src="/compiled/bundles/admincatalog/images/entomophages/logo/{{ entomophage.image }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if entomophage.image2 %}
+            <a href="/compiled/bundles/admincatalog/images/entomophages/original/{{ entomophage.image2 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/entomophages/logo/{{ entomophage.image2 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if entomophage.image3 %}
+            <a href="/compiled/bundles/admincatalog/images/entomophages/original/{{ entomophage.image3 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/entomophages/logo/{{ entomophage.image3 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if entomophage.image4 %}
+            <a href="/compiled/bundles/admincatalog/images/entomophages/original/{{ entomophage.image4 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/entomophages/logo/{{ entomophage.image4 }}" alt="Фото">
             </a>
           {% endif %}
         </td>

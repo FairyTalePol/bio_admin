@@ -13,6 +13,7 @@
       <th>Порог вред. 3</th>
       <th>Порог вред. 4</th>
       <th>Порог вред. 5</th>
+      <th>Видео</th>
       <th>Фото</th>
       <th class="text-center"><a href="{{ path('blight_add') }}" id="add-vermin-btn" class="btn btn-primary btn-sm">Добавить</a></th>
     </tr>
@@ -28,9 +29,25 @@
         <td>{{ blight.disDescription3 }}</td>
         <td>{{ blight.disDescription4 }}</td>
         <td>{{ blight.disDescription5 }}</td>
+        <td>{{ blight.video }}</td>
         <td>{% if blight.image %}
             <a href="/compiled/bundles/admincatalog/images/blight/original/{{ blight.image }}" target="_blank">
               <img src="/compiled/bundles/admincatalog/images/blight/logo/{{ blight.image }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if blight.image2 %}
+            <a href="/compiled/bundles/admincatalog/images/blight/original/{{ blight.image2 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/blight/logo/{{ blight.image2 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if blight.image3 %}
+            <a href="/compiled/bundles/admincatalog/images/blight/original/{{ blight.image3 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/blight/logo/{{ blight.image3 }}" alt="Фото">
+            </a>
+          {% endif %}
+          {% if blight.image4 %}
+            <a href="/compiled/bundles/admincatalog/images/blight/original/{{ blight.image4 }}" target="_blank">
+              <img src="/compiled/bundles/admincatalog/images/blight/logo/{{ blight.image4 }}" alt="Фото">
             </a>
           {% endif %}
         </td>

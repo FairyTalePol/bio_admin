@@ -35,14 +35,6 @@ class ManufacturerType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'attr' => [
-                    'class' => 'form-control attachment_data',
-                ],
-                'required' => false,
-                'mapped' => false
-            ])
-            ->add('attachment')
             ->add('providers', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', [
                 'type' => new ProviderType(),
                 'allow_add' => true,
@@ -54,7 +46,46 @@ class ManufacturerType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-            ]);
+            ])
+            ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control vermin_attachment',
+                ],
+                'required' => false,
+                'mapped' => false
+            ])
+            ->add('attachment_data2', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control vermin_attachment2',
+                ],
+                'required' => false,
+                'mapped' => false
+            ])
+            ->add('attachment_data3', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control vermin_attachment3',
+                ],
+                'required' => false,
+                'mapped' => false
+            ])
+            ->add('attachment_data4', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control vermin_attachment4',
+                ],
+                'required' => false,
+                'mapped' => false
+            ])
+            ->add('video', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'required' => false,
+                'mapped' => false
+            ])
+            ->add('attachment')
+            ->add('attachment2')
+            ->add('attachment3')
+            ->add('attachment4');
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             /** @var ImageBase $imageBase */
@@ -62,7 +93,6 @@ class ManufacturerType extends AbstractType
             $form = $event->getForm();
 
             $imgContent = $form->get('attachment_data')->getData();
-
             $imgContent = preg_replace('/(data\:image\/[a-z]{3,4}\;base64\,)/', '', $imgContent, 1);
             $imgContent = base64_decode($imgContent);
 
@@ -71,6 +101,39 @@ class ManufacturerType extends AbstractType
                 file_put_contents($fPath, $imgContent);
                 $attachment = new File($fPath);
                 $imageBase->setAttachment($attachment);
+            }
+
+            $imgContent = $form->get('attachment_data2')->getData();
+            $imgContent = preg_replace('/(data\:image\/[a-z]{3,4}\;base64\,)/', '', $imgContent, 1);
+            $imgContent = base64_decode($imgContent);
+
+            if ($imgContent) {
+                $fPath = '/tmp/' . uniqid(rand(0, 9999), true);
+                file_put_contents($fPath, $imgContent);
+                $attachment = new File($fPath);
+                $imageBase->setAttachment2($attachment);
+            }
+
+            $imgContent = $form->get('attachment_data3')->getData();
+            $imgContent = preg_replace('/(data\:image\/[a-z]{3,4}\;base64\,)/', '', $imgContent, 1);
+            $imgContent = base64_decode($imgContent);
+
+            if ($imgContent) {
+                $fPath = '/tmp/' . uniqid(rand(0, 9999), true);
+                file_put_contents($fPath, $imgContent);
+                $attachment = new File($fPath);
+                $imageBase->setAttachment3($attachment);
+            }
+
+            $imgContent = $form->get('attachment_data4')->getData();
+            $imgContent = preg_replace('/(data\:image\/[a-z]{3,4}\;base64\,)/', '', $imgContent, 1);
+            $imgContent = base64_decode($imgContent);
+
+            if ($imgContent) {
+                $fPath = '/tmp/' . uniqid(rand(0, 9999), true);
+                file_put_contents($fPath, $imgContent);
+                $attachment = new File($fPath);
+                $imageBase->setAttachment4($attachment);
             }
         });
     }
