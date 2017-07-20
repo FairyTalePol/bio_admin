@@ -28,7 +28,7 @@ abstract class ImageBase extends CUBase {
     /**
      * @var string
      *
-     * @ORM\Column(name="video_url", type="string", nullable=true, unique=false)
+     * @ORM\Column(name="video_url", type="text", nullable=true, unique=false)
      */
     private $video;
 

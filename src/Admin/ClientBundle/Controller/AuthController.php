@@ -69,7 +69,7 @@ class AuthController extends DefaultController
         /** @var Client $client */
         $client = $this->getClientRepository()->findOneBy(
             [
-                'email' => $request->request->get('_username', '')
+                'email' => $request->request->get('_username', ''),
             ]
         );
 
@@ -84,7 +84,14 @@ class AuthController extends DefaultController
             $em = $this->getDoctrine()->getManager();
             $em->merge($client);
             $em->flush();
-            return new RedirectResponse('http://' . $client->getDbRole()->getDomain() . '/token/' . $client->getToken() . '/mobile');
+
+            return new Response(json_encode([
+                'protocol' => $request->getScheme(),
+                'host' => $client->getDbRole()->getDomain(),
+                'token' => $client->getToken(),
+                'auth' => 'success'
+            ], JSON_UNESCAPED_UNICODE), 200, ['Content-Type' => 'application/json']);
+//            return new RedirectResponse('http://' . $client->getDbRole()->getDomain() . '/token/' . $client->getToken() . '/mobile');
         }
     }
 
