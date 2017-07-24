@@ -95,9 +95,10 @@ class SubstrateType extends AbstractType
             ->add('video', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Ссылка на видео'
                 ],
                 'required' => false,
-                'mapped' => false
+                'error_bubbling' => true
             ])
             ->add('attachment')
             ->add('attachment2')
