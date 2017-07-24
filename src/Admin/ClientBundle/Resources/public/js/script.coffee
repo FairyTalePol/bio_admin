@@ -2,7 +2,7 @@ $(document).ready () ->
   $(document).on 'change', '[type=file]', (e) ->
     input = e.currentTarget
     id = $(input).attr('id')
-    attachment_data = $('.' + id)
+    attachment_data = $('#' + id).next().find('input')
     file = input.files[0]
 
     fReader = new FileReader()

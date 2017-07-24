@@ -4,7 +4,7 @@ $(document).ready(function() {
     var attachment_data, fReader, file, id, input;
     input = e.currentTarget;
     id = $(input).attr('id');
-    attachment_data = $('.' + id);
+    attachment_data = $('#' + id).next().find('input');
     file = input.files[0];
     fReader = new FileReader();
     fReader.onload = (function(theFile, that) {

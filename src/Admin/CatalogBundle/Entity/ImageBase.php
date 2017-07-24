@@ -265,7 +265,7 @@ abstract class ImageBase extends CUBase {
     public function saveImage()
     {
         if (!$this->attachment || !($this->attachment instanceof File) || !$this->image) {
-            return;
+//            return;
         } else {
             $fullPath = __DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/' . $this->image;
             $this->attachment->move(__DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/', $this->image);
@@ -280,7 +280,7 @@ abstract class ImageBase extends CUBase {
         }
 
         if (!$this->attachment2 || !($this->attachment2 instanceof File) || !$this->image2) {
-            return;
+//            return;
         } else {
             $fullPath = __DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/' . $this->image2;
             $this->attachment2->move(__DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/', $this->image2);
@@ -295,7 +295,7 @@ abstract class ImageBase extends CUBase {
         }
 
         if (!$this->attachment3 || !($this->attachment3 instanceof File) || !$this->image3) {
-            return;
+//            return;
         } else {
             $fullPath = __DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/' . $this->image3;
             $this->attachment3->move(__DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/', $this->image3);
@@ -310,7 +310,7 @@ abstract class ImageBase extends CUBase {
         }
 
         if (!$this->attachment4 || !($this->attachment4 instanceof File) || !$this->image4) {
-            return;
+//            return;
         } else {
             $fullPath = __DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/' . $this->image4;
             $this->attachment4->move(__DIR__ . '/../Resources/public/images/' . static::$img_dir . '/original/', $this->image4);
