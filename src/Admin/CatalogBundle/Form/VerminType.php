@@ -27,7 +27,8 @@ class VerminType extends AbstractType
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Описание'
+                    'placeholder' => 'Описание',
+                    'rows' => '4'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -35,7 +36,8 @@ class VerminType extends AbstractType
             ->add('dis_description1', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Порог вредности'
+                    'placeholder' => 'Порог вредности',
+                    'rows' => '3'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -43,7 +45,8 @@ class VerminType extends AbstractType
             ->add('dis_description2', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Порог вредности'
+                    'placeholder' => 'Порог вредности',
+                    'rows' => '3'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -51,7 +54,8 @@ class VerminType extends AbstractType
             ->add('dis_description3', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Порог вредности'
+                    'placeholder' => 'Порог вредности',
+                    'rows' => '3'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -59,7 +63,8 @@ class VerminType extends AbstractType
             ->add('dis_description4', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Порог вредности'
+                    'placeholder' => 'Порог вредности',
+                    'rows' => '3'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -67,7 +72,8 @@ class VerminType extends AbstractType
             ->add('dis_description5', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Порог вредности'
+                    'placeholder' => 'Порог вредности',
+                    'rows' => '3'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -111,7 +117,7 @@ class VerminType extends AbstractType
             ->add('video', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Ссылка на видео'
+                    'placeholder' => 'ID видеоролика с Youtube'
                 ],
                 'required' => false,
                 'error_bubbling' => true

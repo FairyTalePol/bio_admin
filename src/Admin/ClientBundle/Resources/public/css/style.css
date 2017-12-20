@@ -11,8 +11,127 @@ body {
 .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 /**************************/
 
+.content-element {
+    margin-bottom: 20px;
+    border-bottom: 1px dashed lightgrey;
+    padding-bottom: 20px;
+}
+
+.clear:after {
+    content: '';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
 .bio-brand {
     height: 40px;
     margin-right: 15px;
     margin-top: 5px;
+}
+
+.name-ru {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    padding-bottom: 5px;
+    margin-bottom: 2px;
+}
+.name-ru form span {
+    font-size: 12px;
+    cursor: pointer;
+}
+.ref-content-img {
+    float: left;
+    margin: 5px 5px 5px 0;
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.ref-content-descr {
+    text-indent: 20px;
+    text-align: justify;
+    margin: 5px 0 0 0;
+}
+.vermin-labels-name {
+    padding: 10px 0;
+}
+.vermin-lights .light {
+    width: 14px;
+    float: left;
+    margin-right: 10px;
+}
+.vermin-lights .vermin-lights-descr {
+    padding-bottom: 15px;
+}
+.vermin-lights .blue-light,
+.vermin-lights .green-light,
+.vermin-lights .yellow-light,
+.vermin-lights .orange-light,
+.vermin-lights .red-light {
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    top: 2px;
+    border-radius: 50%;
+}
+.vermin-lights .blue-light {
+    background-color: blue;
+}
+.vermin-lights .green-light {
+    background-color: green;
+}
+.vermin-lights .yellow-light {
+    background-color: yellow;
+}
+.vermin-lights .orange-light {
+    background-color: orange;
+}
+.vermin-lights .red-light {
+    background-color: red;
+}
+.img-content {
+    width: 210px;
+}
+.small-img-wrap {
+    position: relative;
+    float: left;
+    height: 32px;
+    width: 32px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0;
+    margin: 0 15px 15px 0;
+}
+.small-img-wrap div.small-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+}
+.small-img-wrap div.small-name, .small-img-wrap-tr div.small-name {
+    font-size: 9px;
+    margin-top: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.small-img-wrap-tr {
+    position: relative;
+    float: left;
+    height: 37px;
+    width: 77px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0;
+    margin: 0 15px 15px 0;
+}
+.small-img-wrap-tr div.small-logo-tr {
+    width: 75px;
+    height: 35px;
+    border-radius: 3px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
