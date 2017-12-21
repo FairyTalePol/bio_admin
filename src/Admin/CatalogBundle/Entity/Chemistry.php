@@ -65,9 +65,9 @@ class Chemistry extends ImageBase {
     /**
      * @var string
      *
-     * @ORM\Column(name="volume", type="integer", unique=false, nullable=true)
+     * @ORM\Column(name="volume", type="string", unique=false, nullable=true)
      */
-    private $volume = 0;
+    private $volume;
 
     /**
      * @var string
