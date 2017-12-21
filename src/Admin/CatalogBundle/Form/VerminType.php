@@ -24,6 +24,14 @@ class VerminType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('short_name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Сокращение'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',

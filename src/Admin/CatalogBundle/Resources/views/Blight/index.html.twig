@@ -10,7 +10,7 @@
   <div class="content-element">
     <div class="ref-content-name">
       <div class="name-ru">
-        <strong>{{ blight.category.name }}</strong>: {{ blight.name }}
+        <strong>{{ blight.category.name }}</strong>: {{ blight.name }} {% if blight.shortName %}{{ '(' ~ blight.shortName ~ ')' }}{% endif %}
         <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('blight_edit', {id: blight.id}) }}" enctype="application/x-www-form-urlencoded" method="get">
           <span class="glyphicon glyphicon-edit text-info"></span>
         </form>&nbsp;

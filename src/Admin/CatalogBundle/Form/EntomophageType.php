@@ -25,6 +25,14 @@ class EntomophageType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('short_name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Сокращение'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('norm', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',

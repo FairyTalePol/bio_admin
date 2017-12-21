@@ -10,7 +10,7 @@
   <div class="content-element">
     <div class="ref-content-name">
       <div class="name-ru">
-        <strong>{{ entomophage.category.name }}</strong>: {{ entomophage.name }}
+        <strong>{{ entomophage.category.name }}</strong>: {{ entomophage.name }} {% if entomophage.shortName %}{{ '(' ~ entomophage.shortName ~ ')' }}{% endif %}
         <form id="edit-vermin-btn" style="display: inline-block;" action="{{ path('entomophage_edit', {id: entomophage.id}) }}" enctype="application/x-www-form-urlencoded" method="get">
           <span class="glyphicon glyphicon-edit text-info"></span>
         </form>&nbsp;
