@@ -64,12 +64,16 @@
     <div class="vermin-labels">
       <div class="vermin-labels-name"><strong>{{ 'Контролирует вредителей' }}</strong></div>
       <div>
-        {% for vermin in chemistry.vermins %}
-          <div class="small-img-wrap" title="{{ vermin.name }}">
-            <div class="small-logo" style="{% if vermin.image %}background-image: url(/compiled/bundles/admincatalog/images/vermin/logo/{{ vermin.image }}){% else %}background-color: #fff{% endif %};"></div>
-            <div class="small-name"><strong>{{ vermin.name }}</strong></div>
-          </div>
-        {% endfor %}
+        {% if chemistry.vermins|length %}
+          {% for vermin in chemistry.vermins %}
+            <div class="small-img-wrap" title="{{ vermin.name }}">
+              <div class="small-logo" style="{% if vermin.image %}background-image: url(/compiled/bundles/admincatalog/images/vermin/logo/{{ vermin.image }}){% else %}background-color: #fff{% endif %};"></div>
+              <div class="small-name"><strong>{{ vermin.name }}</strong></div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {{ 'Ссылка не указана' }}
+        {% endif %}
       </div>
     </div>
 
@@ -78,12 +82,16 @@
     <div class="vermin-labels">
       <div class="vermin-labels-name"><strong>{{ 'Контролирует болезни' }}</strong></div>
       <div>
-        {% for blight in chemistry.blights %}
-          <div class="small-img-wrap" title="{{ blight.name }}">
-            <div class="small-logo" style="{% if blight.image %}background-image: url(/compiled/bundles/admincatalog/images/blight/logo/{{ blight.image }}){% else %}background-color: #fff{% endif %};"></div>
-            <div class="small-name"><strong>{{ blight.name }}</strong></div>
-          </div>
-        {% endfor %}
+        {% if chemistry.blights|length %}
+          {% for blight in chemistry.blights %}
+            <div class="small-img-wrap" title="{{ blight.name }}">
+              <div class="small-logo" style="{% if blight.image %}background-image: url(/compiled/bundles/admincatalog/images/blight/logo/{{ blight.image }}){% else %}background-color: #fff{% endif %};"></div>
+              <div class="small-name"><strong>{{ blight.name }}</strong></div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {{ 'Ссылка не указана' }}
+        {% endif %}
       </div>
     </div>
 
@@ -92,12 +100,16 @@
     <div class="vermin-labels">
       <div class="vermin-labels-name"><strong>{{ 'Производители' }}</strong></div>
       <div>
-        {% for manufacturer in chemistry.manufacturers %}
-          <div class="small-img-wrap-tr" title="{{ manufacturer.name }}">
-            <div class="small-logo-tr" style="{% if manufacturer.image %}background-image: url(/compiled/bundles/admincatalog/images/manufacturers/logo/{{ manufacturer.image }}){% else %}background-color: #fff{% endif %};"></div>
-            <div class="small-name"><strong>{{ manufacturer.name }}</strong></div>
-          </div>
-        {% endfor %}
+        {% if chemistry.manufacturers|length %}
+          {% for manufacturer in chemistry.manufacturers %}
+            <div class="small-img-wrap-tr" title="{{ manufacturer.name }}">
+              <div class="small-logo-tr" style="{% if manufacturer.image %}background-image: url(/compiled/bundles/admincatalog/images/manufacturers/logo/{{ manufacturer.image }}){% else %}background-color: #fff{% endif %};"></div>
+              <div class="small-name"><strong>{{ manufacturer.name }}</strong></div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {{ 'Ссылка не указана' }}
+        {% endif %}
       </div>
     </div>
 
@@ -111,7 +123,9 @@
             {{ 'https://www.youtube.com/embed/' ~ chemistry.video }}
           </a>
         {% else %}
-          {{ 'Ссылка не указана' }}{% endif %}</div>
+          {{ 'Ссылка не указана' }}
+        {% endif %}
+      </div>
     </div>
 
     <div class="end-border"></div>
