@@ -39,6 +39,13 @@ class Vermin extends ImageBase {
     /**
      * @var string
      *
+     * @ORM\Column(name="short_name", type="string", unique=false, nullable=true)
+     */
+    private $short_name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", unique=false, nullable=true)
      */
     private $description;
@@ -136,6 +143,25 @@ class Vermin extends ImageBase {
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getShortName()
+    {
+        return $this->short_name;
+    }
+
+    /**
+     * @param string $short_name
+     * @return Vermin
+     */
+    public function setShortName($short_name)
+    {
+        $this->short_name = $short_name;
+        return $this;
+    }
+
 
     /**
      * @return string

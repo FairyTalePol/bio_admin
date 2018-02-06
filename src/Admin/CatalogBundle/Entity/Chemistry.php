@@ -65,16 +65,16 @@ class Chemistry extends ImageBase {
     /**
      * @var string
      *
-     * @ORM\Column(name="volume", type="integer", unique=false, nullable=true)
+     * @ORM\Column(name="volume", type="string", unique=false, nullable=true)
      */
-    private $volume = 0;
+    private $volume;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="norm", type="integer", unique=false, nullable=true)
+     * @ORM\Column(name="norm", type="string", unique=false, nullable=true)
      */
-    private $norm = 0;
+    private $norm;
 
     /**
      * @var ArrayCollection

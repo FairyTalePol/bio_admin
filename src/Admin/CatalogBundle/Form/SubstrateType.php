@@ -29,7 +29,8 @@ class SubstrateType extends AbstractType
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Описание'
+                    'placeholder' => 'Описание',
+                    'rows' => '4'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -95,7 +96,7 @@ class SubstrateType extends AbstractType
             ->add('video', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Ссылка на видео'
+                    'placeholder' => 'ID видеоролика с Youtube'
                 ],
                 'required' => false,
                 'error_bubbling' => true
