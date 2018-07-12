@@ -17,6 +17,15 @@ class ChemistryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
+            ->add('category', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'class' => 'Admin\CatalogBundle\Entity\ChemistryCategory',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'choice_label' => 'name',
+                'required' => true
+            ])
             ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
@@ -25,10 +34,10 @@ class ChemistryType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
-            ->add('norm', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ->add('volume', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Концентрация препарата'
+                    'placeholder' => 'Объем'
                 ],
                 'required' => true,
                 'error_bubbling' => true
@@ -41,22 +50,12 @@ class ChemistryType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
-            ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+            ->add('chemistry_class', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Описание',
-                    'rows' => '4'
+                    'placeholder' => 'Химический класс'
                 ],
                 'required' => false,
-                'error_bubbling' => true
-            ])
-            ->add('prophylaxy')
-            ->add('volume', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Объем'
-                ],
-                'required' => true,
                 'error_bubbling' => true
             ])
             ->add('vermins', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
@@ -77,6 +76,42 @@ class ChemistryType extends AbstractType
                 'multiple' => true,
                 'required' => false
             ])
+            ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Описание',
+                    'rows' => '4'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('action_mechanism', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Механизм действия'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('waiting_time', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Время ожидания'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+
+            ->add('norm', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Концентрация препарата'
+                ],
+                'required' => true,
+                'error_bubbling' => true
+            ])
+            ->add('prophylaxy')
+
             ->add('manufacturers', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class' => 'Admin\CatalogBundle\Entity\Manufacturer',
                 'query_builder' => function (ManufacturerRepository $repo) {
@@ -91,14 +126,6 @@ class ChemistryType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'required' => false
-            ])
-            ->add('category', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                'class' => 'Admin\CatalogBundle\Entity\ChemistryCategory',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'choice_label' => 'name',
-                'required' => true
             ])
             ->add('attachment_data', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [

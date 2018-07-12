@@ -52,12 +52,14 @@
     </div>
 
 
-    <div class="ref-content-descr"><strong>{{ 'Действующее вещество:' }} {{ chemistry.substance }}</strong></div>
+    <div class="ref-content-descr"><strong>{{ 'Действующее вещество:' }}</strong> {{ chemistry.substance }}</div>
+    <div class="ref-content-descr"><strong>{{ 'Химический класс:' }}</strong> {{ chemistry.chemistryClass }}</div>
     <div class="ref-content-descr">{{ chemistry.description }}</div>
 
-    <div class="vermin-labels-name">
-      <h5>{{ 'Концентрация препарата на' }} <strong>{{ chemistry.norm }}</strong></h5>
-    </div>
+    <p></p>
+    <div class="ref-content-descr"><strong>{{ 'Механизм действия:' }}</strong> {{ chemistry.actionMechanism }}</div>
+    <div class="ref-content-descr"><strong>{{ 'Время ожидания:' }}</strong> {{ chemistry.waitingTime }} {{ 'недель(я)' }}</div>
+    <div class="ref-content-descr"><strong>{{ 'Концентрация препарата' }}</strong> {{ chemistry.norm }} {{ 'мл. на 100 л. воды' }}</div>
 
     <div class="clear"></div>
 

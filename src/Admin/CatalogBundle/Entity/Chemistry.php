@@ -20,8 +20,8 @@ class Chemistry extends ImageBase {
     protected static $img_dir = 'chemistry';
 
     public static $logo_size = [
-        'width' => 60,
-        'height' => 60
+        'width' => 100,
+        'height' => 100
     ];
 
     /**
@@ -75,6 +75,27 @@ class Chemistry extends ImageBase {
      * @ORM\Column(name="norm", type="string", unique=false, nullable=true)
      */
     private $norm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="chemistry_class", type="string", unique=false, nullable=true)
+     */
+    private $chemistry_class;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="action_mechanism", type="string", unique=false, nullable=true)
+     */
+    private $action_mechanism;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="waiting_time", type="integer", unique=false, nullable=true)
+     */
+    private $waiting_time;
 
     /**
      * @var ArrayCollection
@@ -307,6 +328,60 @@ class Chemistry extends ImageBase {
     public function setBlights($blights)
     {
         $this->blights = $blights;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChemistryClass()
+    {
+        return $this->chemistry_class;
+    }
+
+    /**
+     * @param string $chemistry_class
+     * @return Chemistry
+     */
+    public function setChemistryClass($chemistry_class)
+    {
+        $this->chemistry_class = $chemistry_class;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActionMechanism()
+    {
+        return $this->action_mechanism;
+    }
+
+    /**
+     * @param string $action_mechanism
+     * @return Chemistry
+     */
+    public function setActionMechanism($action_mechanism)
+    {
+        $this->action_mechanism = $action_mechanism;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWaitingTime()
+    {
+        return $this->waiting_time;
+    }
+
+    /**
+     * @param string $waiting_time
+     * @return Chemistry
+     */
+    public function setWaitingTime($waiting_time)
+    {
+        $this->waiting_time = $waiting_time;
         return $this;
     }
 
