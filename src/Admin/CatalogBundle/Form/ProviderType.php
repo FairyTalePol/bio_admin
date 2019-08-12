@@ -6,6 +6,7 @@ use Admin\CatalogBundle\Entity\Manufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ProviderType extends AbstractType
 {
@@ -60,7 +61,7 @@ class ProviderType extends AbstractType
         $resolver->setDefaults(array(
             'csrf_protection' => true,
             'data_class' => 'Admin\CatalogBundle\Entity\Provider',
-            'cascade_validation' => true
+            'constraints' => new Valid()
         ));
     }
 

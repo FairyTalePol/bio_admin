@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Dima S.
- * Date: 22.04.14
- * Time: 11:42
- */
 
 namespace Admin\ClientBundle\Form;
 

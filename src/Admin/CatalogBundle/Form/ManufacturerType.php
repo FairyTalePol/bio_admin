@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ManufacturerType extends AbstractType
 {
@@ -36,12 +37,12 @@ class ManufacturerType extends AbstractType
                 ],
             ])
             ->add('providers', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', [
-                'type' => new ProviderType(),
+                'entry_type' => ProviderType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'error_bubbling' => true,
                 'by_reference' => true,
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
@@ -143,7 +144,7 @@ class ManufacturerType extends AbstractType
     {
         $resolver->setDefaults(array(
             'csrf_protection' => true,
-            'cascade_validation' => false
+            'constraints' => new Valid()
         ));
     }
 

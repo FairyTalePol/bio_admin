@@ -2,17 +2,12 @@
 
 namespace Admin\CatalogBundle\Controller;
 
-use Admin\CatalogBundle\Entity\Manufacturer;
-use Admin\CatalogBundle\Exception\ChildrenException;
-use Doctrine\ORM\Query;
 use Admin\CatalogBundle\Entity\CultureManufacturer;
 use Admin\CatalogBundle\Form\CultureManufacturerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * CultureManufacturer API controller.
@@ -22,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class CultureManufacturerController extends DefaultController
 {
     /**
-     * @Route("/", name="culture_manufacturer")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="culture_manufacturer",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/CultureManufacturer/index.html.twig")
      */
     public function indexAction()
     {
@@ -40,15 +38,18 @@ class CultureManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="culture_manufacturer_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:CultureManufacturer:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="culture_manufacturer_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/CultureManufacturer/edit.html.twig")
      */
     public function addAction()
     {
         $culture = new CultureManufacturer();
 
-        $form = $this->createForm(new CultureManufacturerType(), $culture, [
+        $form = $this->createForm(CultureManufacturerType::class, $culture, [
             'error_bubbling' => true
         ]);
 
@@ -58,23 +59,30 @@ class CultureManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="culture_manufacturer_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="culture_manufacturer_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/CultureManufacturer/edit.html.twig")
      * @param CultureManufacturer $culture
      * @return array
      */
     public function editAction(CultureManufacturer $culture)
     {
         return [
-            'form' => $this->createForm(new CultureManufacturerType(), $culture)->createView()
+            'form' => $this->createForm(CultureManufacturerType::class, $culture)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="culture_manufacturer_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:CultureManufacturer:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="culture_manufacturer_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/CultureManufacturer/edit.html.twig")
      * @param Request $request
      * @param CultureManufacturer $culture
      * @return array
@@ -85,7 +93,7 @@ class CultureManufacturerController extends DefaultController
             $culture = new CultureManufacturer();
         }
 
-        $form = $this->createForm(new CultureManufacturerType(), $culture);
+        $form = $this->createForm(CultureManufacturerType::class, $culture);
 
         $form->handleRequest($request);
 
@@ -101,10 +109,13 @@ class CultureManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="culture_manufacturer_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="culture_manufacturer_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param CultureManufacturer $culture
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(CultureManufacturer $culture)
     {

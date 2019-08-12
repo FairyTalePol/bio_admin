@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\VerminCategory;
 use Admin\CatalogBundle\Form\VerminCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * VerminCategory API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class VerminCategoryController extends DefaultController
 {
     /**
-     * @Route("/", name="vermin_category")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="vermin_category",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/VerminCategory/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class VerminCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="vermin_category_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:VerminCategory:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="vermin_category_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/VerminCategory/edit.html.twig")
      */
     public function addAction()
     {
         $vermin_category = new VerminCategory();
 
-        $form = $this->createForm(new VerminCategoryType(), $vermin_category, [
+        $form = $this->createForm(VerminCategoryType::class, $vermin_category, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class VerminCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="vermin_category_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="vermin_category_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/VerminCategory/edit.html.twig")
      * @param VerminCategory $vermin_category
      * @return array
      */
     public function editAction(VerminCategory $vermin_category)
     {
         return [
-            'form' => $this->createForm(new VerminCategoryType(), $vermin_category)->createView()
+            'form' => $this->createForm(VerminCategoryType::class, $vermin_category)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="vermin_category_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:VerminCategory:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="vermin_category_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/VerminCategory/edit.html.twig")
      * @param Request $request
      * @param VerminCategory $vermin_category
      * @return array
@@ -80,7 +93,7 @@ class VerminCategoryController extends DefaultController
             $vermin_category = new VerminCategory();
         }
 
-        $form = $this->createForm(new VerminCategoryType(), $vermin_category);
+        $form = $this->createForm(VerminCategoryType::class, $vermin_category);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class VerminCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="vermin_category_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="vermin_category_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param VerminCategory $vermin_category
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(VerminCategory $vermin_category)
     {

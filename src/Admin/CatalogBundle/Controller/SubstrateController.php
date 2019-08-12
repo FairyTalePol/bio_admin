@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Substrate;
 use Admin\CatalogBundle\Form\SubstrateType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Substrate API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class SubstrateController extends DefaultController
 {
     /**
-     * @Route("/", name="substrate")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="substrate",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/Substrate/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class SubstrateController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="substrate_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Substrate:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="substrate_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Substrate/edit.html.twig")
      */
     public function addAction()
     {
         $substrate = new Substrate();
 
-        $form = $this->createForm(new SubstrateType(), $substrate, [
+        $form = $this->createForm(SubstrateType::class, $substrate, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class SubstrateController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="substrate_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="substrate_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Substrate/edit.html.twig")
      * @param Substrate $substrate
      * @return array
      */
     public function editAction(Substrate $substrate)
     {
         return [
-            'form' => $this->createForm(new SubstrateType(), $substrate)->createView()
+            'form' => $this->createForm(SubstrateType::class, $substrate)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="substrate_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Substrate:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="substrate_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Substrate/edit.html.twig")
      * @param Request $request
      * @param Substrate $substrate
      * @return array
@@ -80,7 +93,7 @@ class SubstrateController extends DefaultController
             $substrate = new Substrate();
         }
 
-        $form = $this->createForm(new SubstrateType(), $substrate);
+        $form = $this->createForm(SubstrateType::class, $substrate);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class SubstrateController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="substrate_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="substrate_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Substrate $substrate
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Substrate $substrate)
     {

@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\EntomophageCategory;
 use Admin\CatalogBundle\Form\EntomophageCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * EntomophageCategory API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class EntomophageCategoryController extends DefaultController
 {
     /**
-     * @Route("/", name="entomophage_category")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="entomophage_category",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/EntomophageCategory/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class EntomophageCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="entomophage_category_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:EntomophageCategory:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="entomophage_category_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/EntomophageCategory/edit.html.twig")
      */
     public function addAction()
     {
         $entomophage_category = new EntomophageCategory();
 
-        $form = $this->createForm(new EntomophageCategoryType(), $entomophage_category, [
+        $form = $this->createForm(EntomophageCategoryType::class, $entomophage_category, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class EntomophageCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="entomophage_category_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="entomophage_category_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/EntomophageCategory/edit.html.twig")
      * @param EntomophageCategory $entomophage_category
      * @return array
      */
     public function editAction(EntomophageCategory $entomophage_category)
     {
         return [
-            'form' => $this->createForm(new EntomophageCategoryType(), $entomophage_category)->createView()
+            'form' => $this->createForm(EntomophageCategoryType::class, $entomophage_category)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="entomophage_category_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:EntomophageCategory:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="entomophage_category_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/EntomophageCategory/edit.html.twig")
      * @param Request $request
      * @param EntomophageCategory $entomophage_category
      * @return array
@@ -80,7 +93,7 @@ class EntomophageCategoryController extends DefaultController
             $entomophage_category = new EntomophageCategory();
         }
 
-        $form = $this->createForm(new EntomophageCategoryType(), $entomophage_category);
+        $form = $this->createForm(EntomophageCategoryType::class, $entomophage_category);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class EntomophageCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="entomophage_category_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="entomophage_category_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param EntomophageCategory $entomophage_category
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(EntomophageCategory $entomophage_category)
     {

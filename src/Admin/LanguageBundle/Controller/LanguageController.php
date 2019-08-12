@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 3/24/14
- * Time: 4:31 PM
- */
 
 namespace Admin\LanguageBundle\Controller;
 
 use Admin\LanguageBundle\Entity\Language;
 use Admin\LanguageBundle\Form\LanguageType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,9 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
 class LanguageController extends DefaultController
 {
     /**
-     * @Route("/", name="language")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="language",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminLanguage/Language/index.html.twig")
      */
     public function indexAction()
     {
@@ -42,11 +39,14 @@ class LanguageController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="language_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="language_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @ParamConverter("language", class="AdminLanguageBundle:Language")
      * @param Language $language
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Language $language)
     {
@@ -59,17 +59,24 @@ class LanguageController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="language_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminLanguageBundle:Language:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="language_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminLanguage/Language/edit.html.twig")
      */
     public function addAction()
     {
         $language = new Language();
 
-        $form = $this->createForm(new LanguageType(), $language, [
-            'error_bubbling' => true,
-        ]);
+        $form = $this->createForm(
+            LanguageType::class,
+            $language,
+            [
+                'error_bubbling' => true,
+            ]
+        );
 
         return [
             'form' => $form->createView(),
@@ -77,10 +84,13 @@ class LanguageController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="language_edit")
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="language_edit",
+     *     methods={"GET", "POST"}
+     * )
      * @ParamConverter("language", class="AdminLanguageBundle:Language")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Template("@AdminLanguage/Language/edit.html.twig")
      * @param Request $request
      * @param Language $language
      * @return array
@@ -88,15 +98,19 @@ class LanguageController extends DefaultController
     public function editAction(Request $request, Language $language)
     {
         return [
-            'form' => $this->createForm(new LanguageType(), $language)->createView(),
+            'form' => $this->createForm(LanguageType::class, $language)->createView(),
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="language_update")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="language_update",
+     *     methods={"POST"}
+     * )
      * @ParamConverter("language", class="AdminLanguageBundle:Language")
-     * @Method({"POST"})
-     * @Template("AdminLanguageBundle:Language:edit.html.twig")
+     * @Template("@AdminLanguage/Language/edit.html.twig")
      * @param Request $request
      * @param Language $language
      * @return array
@@ -107,17 +121,18 @@ class LanguageController extends DefaultController
             $language = new Language();
         }
 
-        $form = $this->createForm(new LanguageType(), $language);
+        $form = $this->createForm(LanguageType::class, $language);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            if ($language->getId())
+            if ($language->getId()) {
                 $em->merge($language);
-            else
+            } else {
                 $em->persist($language);
+            }
 
             $em->flush();
         }

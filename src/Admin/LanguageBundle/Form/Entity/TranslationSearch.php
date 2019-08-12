@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 11/6/15
- * Time: 10:47 AM
- */
 
 namespace Admin\LanguageBundle\Form\Entity;
-
 
 use Admin\LanguageBundle\Entity\Language;
 

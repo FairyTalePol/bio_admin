@@ -2,29 +2,31 @@
 
 {% block body %}
 
-  <table class="table table-responsive table-striped table-hover">
+  <table class="table table-hover">
     <thead>
     <tr>
-      <th>Название</th>
+      <th>Id</th>
+      <th>Name</th>
       <th>Locale</th>
-      <th class="text-center"><a href="{{ path('language_add') }}" id="add-language-btn" class="btn btn-primary btn-sm">Добавить</a></th>
+      <th>&nbsp;</th>
     </tr>
     </thead>
     <tbody>
     {% for language in languages %}
       <tr>
+        <td>{{ language.id }}</td>
         <td>{{ language.name }}</td>
         <td>{{ language.locale }}</td>
-        <td class="text-center">
+        <td>
           <nobr>
             <form id="edit-language-btn" style="display: inline-block;"
                   action="{{ path('language_edit', {id: language.id}) }}"
                   enctype="application/x-www-form-urlencoded" method="get">
-              <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
-            </form>&nbsp;
+              <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></button>
+            </form>
             <form style="display: inline-block;" action="{{ path('language_delete', {id: language.id}) }}"
                   enctype="application/x-www-form-urlencoded" method="get">
-              <button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+              <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
             </form>
           </nobr>
         </td>
@@ -32,6 +34,8 @@
     {% endfor %}
     </tbody>
   </table>
+
+  <a href="{{ path('language_add') }}" id="add-language-btn" class="btn btn-primary">Добавить</a>
 
   <div id="modal" class="modal fade">
     <div class="modal-dialog">

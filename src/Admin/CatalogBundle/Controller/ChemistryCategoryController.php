@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\ChemistryCategory;
 use Admin\CatalogBundle\Form\ChemistryCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * ChemistryCategory API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ChemistryCategoryController extends DefaultController
 {
     /**
-     * @Route("/", name="chemistry_category")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="chemistry_category",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/ChemistryCategory/index.html.twig")
      */
     public function indexAction()
     {
@@ -30,46 +33,60 @@ class ChemistryCategoryController extends DefaultController
             ->getResult();
 
         return [
-            'chemistry_categories' => $chemistry_categories
+            'chemistry_categories' => $chemistry_categories,
         ];
     }
 
     /**
-     * @Route("/add", name="chemistry_category_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:ChemistryCategory:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="chemistry_category_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/ChemistryCategory/edit.html.twig")
      */
     public function addAction()
     {
         $chemistry_category = new ChemistryCategory();
 
-        $form = $this->createForm(new ChemistryCategoryType(), $chemistry_category, [
-            'error_bubbling' => true
-        ]);
+        $form = $this->createForm(
+            ChemistryCategoryType::class,
+            $chemistry_category,
+            [
+                'error_bubbling' => true,
+            ]
+        );
 
         return [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
     /**
-     * @Route("/edit/{id}", name="chemistry_category_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="chemistry_category_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/ChemistryCategory/edit.html.twig")
      * @param ChemistryCategory $chemistry_category
      * @return array
      */
     public function editAction(ChemistryCategory $chemistry_category)
     {
         return [
-            'form' => $this->createForm(new ChemistryCategoryType(), $chemistry_category)->createView()
+            'form' => $this->createForm(ChemistryCategoryType::class, $chemistry_category)->createView(),
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="chemistry_category_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:ChemistryCategory:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="chemistry_category_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/ChemistryCategory/edit.html.twig")
      * @param Request $request
      * @param ChemistryCategory $chemistry_category
      * @return array
@@ -80,7 +97,7 @@ class ChemistryCategoryController extends DefaultController
             $chemistry_category = new ChemistryCategory();
         }
 
-        $form = $this->createForm(new ChemistryCategoryType(), $chemistry_category);
+        $form = $this->createForm(ChemistryCategoryType::class, $chemistry_category);
 
         $form->handleRequest($request);
 
@@ -91,15 +108,18 @@ class ChemistryCategoryController extends DefaultController
         }
 
         return [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
     /**
-     * @Route("/delete/{id}", name="chemistry_category_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="chemistry_category_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param ChemistryCategory $chemistry_category
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(ChemistryCategory $chemistry_category)
     {

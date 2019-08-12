@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Form\SubstrateCategoryType;
 use Admin\CatalogBundle\Entity\SubstrateCategory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * SubstrateCategory API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class SubstrateCategoryController extends DefaultController
 {
     /**
-     * @Route("/", name="substrate_category")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="substrate_category",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategory/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class SubstrateCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="substrate_category_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:SubstrateCategory:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="substrate_category_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategory/edit.html.twig")
      */
     public function addAction()
     {
         $substrate_category = new SubstrateCategory();
 
-        $form = $this->createForm(new SubstrateCategoryType(), $substrate_category, [
+        $form = $this->createForm(SubstrateCategoryType::class, $substrate_category, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class SubstrateCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="substrate_category_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="substrate_category_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategory/edit.html.twig")
      * @param SubstrateCategory $substrate_category
      * @return array
      */
     public function editAction(SubstrateCategory $substrate_category)
     {
         return [
-            'form' => $this->createForm(new SubstrateCategoryType(), $substrate_category)->createView()
+            'form' => $this->createForm(SubstrateCategoryType::class, $substrate_category)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="substrate_category_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:SubstrateCategory:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="substrate_category_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategory/edit.html.twig")
      * @param Request $request
      * @param SubstrateCategory $substrate_category
      * @return array
@@ -80,7 +93,7 @@ class SubstrateCategoryController extends DefaultController
             $substrate_category = new SubstrateCategory();
         }
 
-        $form = $this->createForm(new SubstrateCategoryType(), $substrate_category);
+        $form = $this->createForm(SubstrateCategoryType::class, $substrate_category);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class SubstrateCategoryController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="substrate_category_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="substrate_category_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param SubstrateCategory $substrate_category
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(SubstrateCategory $substrate_category)
     {

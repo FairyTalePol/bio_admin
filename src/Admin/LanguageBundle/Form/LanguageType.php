@@ -2,6 +2,7 @@
 
 namespace Admin\LanguageBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,18 +12,18 @@ class LanguageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Название',
+                    'placeholder' => 'Language name',
                 ],
                 'required' => true,
                 'error_bubbling' => true,
             ])
-            ->add('locale', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ->add('locale', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Короткое обозначение языка',
+                    'placeholder' => 'Locale',
                 ],
                 'required' => true,
                 'error_bubbling' => true,

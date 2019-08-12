@@ -2,12 +2,11 @@
 
 namespace Admin\LanguageBundle\Form;
 
-use Admin\LanguageBundle\Entity\Translation;
-use Doctrine\ORM\EntityManager;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TranslationSearchType extends AbstractType
@@ -15,7 +14,7 @@ class TranslationSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'Symfony\Component\Form\Extension\Core\Type\TextType',[
+            ->add('id', TextType::class,[
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
@@ -23,7 +22,7 @@ class TranslationSearchType extends AbstractType
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('language', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+            ->add('language', EntityType::class, [
                 'class' => 'Admin\LanguageBundle\Entity\Language',
                 'attr' => [
                     'class' => 'form-control',
@@ -32,7 +31,7 @@ class TranslationSearchType extends AbstractType
                 'error_bubbling' => true,
                 'choice_label' => 'name'
             ])
-            ->add('value', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ->add('value', TextType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
@@ -40,7 +39,7 @@ class TranslationSearchType extends AbstractType
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('term', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ->add('term', TextType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',
@@ -48,7 +47,7 @@ class TranslationSearchType extends AbstractType
                 ],
                 'error_bubbling' => true,
             ])
-            ->add('page', 'Symfony\Component\Form\Extension\Core\Type\HiddenType', [
+            ->add('page', HiddenType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control',

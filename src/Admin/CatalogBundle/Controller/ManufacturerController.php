@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Manufacturer;
 use Admin\CatalogBundle\Form\ManufacturerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Manufacturer API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ManufacturerController extends DefaultController
 {
     /**
-     * @Route("/", name="manufacturer")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="manufacturer",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/Manufacturer/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class ManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="manufacturer_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Manufacturer:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="manufacturer_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Manufacturer/edit.html.twig")
      */
     public function addAction()
     {
         $manufacturer = new Manufacturer();
 
-        $form = $this->createForm(new ManufacturerType(), $manufacturer, [
+        $form = $this->createForm(ManufacturerType::class, $manufacturer, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class ManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="manufacturer_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="manufacturer_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Manufacturer/edit.html.twig")
      * @param Manufacturer $manufacturer
      * @return array
      */
     public function editAction(Manufacturer $manufacturer)
     {
         return [
-            'form' => $this->createForm(new ManufacturerType(), $manufacturer)->createView()
+            'form' => $this->createForm(ManufacturerType::class, $manufacturer)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="manufacturer_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Manufacturer:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="manufacturer_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Manufacturer/edit.html.twig")
      * @param Request $request
      * @param Manufacturer $manufacturer
      * @return array
@@ -80,7 +93,7 @@ class ManufacturerController extends DefaultController
             $manufacturer = new Manufacturer();
         }
 
-        $form = $this->createForm(new ManufacturerType(), $manufacturer);
+        $form = $this->createForm(ManufacturerType::class, $manufacturer);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class ManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="manufacturer_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="manufacturer_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Manufacturer $manufacturer
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Manufacturer $manufacturer)
     {

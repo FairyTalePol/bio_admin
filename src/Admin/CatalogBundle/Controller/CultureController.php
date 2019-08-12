@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Culture;
 use Admin\CatalogBundle\Form\CultureType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Culture API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class CultureController extends DefaultController
 {
     /**
-     * @Route("/", name="culture")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="culture",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/Culture/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class CultureController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="culture_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Culture:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="culture_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Culture/edit.html.twig")
      */
     public function addAction()
     {
         $culture = new Culture();
 
-        $form = $this->createForm(new CultureType(), $culture, [
+        $form = $this->createForm(CultureType::class, $culture, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class CultureController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="culture_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="culture_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Culture/edit.html.twig")
      * @param Culture $culture
      * @return array
      */
     public function editAction(Culture $culture)
     {
         return [
-            'form' => $this->createForm(new CultureType(), $culture)->createView()
+            'form' => $this->createForm(CultureType::class, $culture)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="culture_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Culture:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="culture_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Culture/edit.html.twig")
      * @param Request $request
      * @param Culture $culture
      * @return array
@@ -80,7 +93,7 @@ class CultureController extends DefaultController
             $culture = new Culture();
         }
 
-        $form = $this->createForm(new CultureType(), $culture);
+        $form = $this->createForm(CultureType::class, $culture);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class CultureController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="culture_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="culture_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Culture $culture
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Culture $culture)
     {

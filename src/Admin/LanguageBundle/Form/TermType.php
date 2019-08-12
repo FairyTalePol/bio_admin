@@ -3,6 +3,7 @@
 namespace Admin\LanguageBundle\Form;
 
 use Admin\LanguageBundle\Entity\Term;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +19,7 @@ class TermType extends AbstractType
         $em = $options['em'];
 
         $builder
-            ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Term',

@@ -11,14 +11,16 @@ class DefaultController extends Controller
     /**
      * @return ClientRepository
      */
-    public function getClientRepository() {
+    public function getClientRepository()
+    {
         return $this->getDoctrine()->getRepository('AdminClientBundle:Client');
     }
 
     /**
      * @return DBRoleRepository
      */
-    public function getDBRoleRepository() {
+    public function getDBRoleRepository()
+    {
         return $this->getDoctrine()->getRepository('AdminClientBundle:DBRole');
     }
 }

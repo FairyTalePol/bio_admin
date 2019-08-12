@@ -29,7 +29,7 @@ class Client implements UserInterface
     private static $user_roles = [
         self::ROLE_USER,
         self::ROLE_ADMIN,
-        self::ROLE_SUPER_ADMIN
+        self::ROLE_SUPER_ADMIN,
     ];
 
     /**
@@ -226,6 +226,7 @@ class Client implements UserInterface
     public function setSalt($salt)
     {
         $this->salt = $salt;
+
         return $this;
     }
 
@@ -267,6 +268,7 @@ class Client implements UserInterface
     public function setDbRole($DBRole)
     {
         $this->db_role = $DBRole;
+
         return $this;
     }
 
@@ -285,6 +287,7 @@ class Client implements UserInterface
     public function setToken($token)
     {
         $this->token = $token;
+
         return $this;
     }
 
@@ -303,6 +306,7 @@ class Client implements UserInterface
     public function setTokenCreated($token_created)
     {
         $this->token_created = $token_created;
+
         return $this;
     }
 
@@ -321,6 +325,7 @@ class Client implements UserInterface
     public function setLoginDtm($login_dtm)
     {
         $this->login_dtm = $login_dtm;
+
         return $this;
     }
 
@@ -339,6 +344,7 @@ class Client implements UserInterface
     public function setLoginIp($login_ip)
     {
         $this->login_ip = $login_ip;
+
         return $this;
     }
 
@@ -357,6 +363,7 @@ class Client implements UserInterface
     public function setRegDtm($reg_dtm)
     {
         $this->reg_dtm = $reg_dtm;
+
         return $this;
     }
 
@@ -375,6 +382,7 @@ class Client implements UserInterface
     public function setRegIp($reg_ip)
     {
         $this->reg_ip = $reg_ip;
+
         return $this;
     }
 
@@ -390,6 +398,7 @@ class Client implements UserInterface
      * @ORM\PrePersist()
      *
      * @return Client
+     * @throws \Exception
      */
     public function setCreated()
     {
@@ -411,6 +420,7 @@ class Client implements UserInterface
      * @ORM\PreUpdate()
      *
      * @return Client
+     * @throws \Exception
      */
     public function setUpdated()
     {
@@ -480,7 +490,7 @@ class Client implements UserInterface
             'reg_ip',
             'reg_dtm',
             'login_ip',
-            'login_dtm'
+            'login_dtm',
         );
     }
 

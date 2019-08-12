@@ -18,11 +18,11 @@
         <td class="text-center">
           <nobr>
             <form id="edit-vermin-btn" style="display: inline-block;"
-                  action="{{ path('substrate_category_edit', {id: sm.id}) }}"
+                  action="{{ path('substrate_manufacturer_edit', {id: sm.id}) }}"
                   enctype="application/x-www-form-urlencoded" method="get">
               <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
             </form>&nbsp;
-            <form style="display: inline-block;" action="{{ path('substrate_category_delete', {id: sm.id}) }}"
+            <form style="display: inline-block;" action="{{ path('substrate_manufacturer_delete', {id: sm.id}) }}"
                   enctype="application/x-www-form-urlencoded" method="get">
               <button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
             </form>

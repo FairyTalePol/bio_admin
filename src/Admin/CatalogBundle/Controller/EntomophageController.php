@@ -5,8 +5,8 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Entomophage;
 use Admin\CatalogBundle\Form\EntomophageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,9 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 class EntomophageController extends DefaultController
 {
     /**
-     * @Route("/", name="entomophage")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="entomophage",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/Entomophage/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class EntomophageController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="entomophage_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Entomophage:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="entomophage_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Entomophage/edit.html.twig")
      */
     public function addAction()
     {
         $entomophage = new Entomophage();
 
-        $form = $this->createForm(new EntomophageType(), $entomophage, [
+        $form = $this->createForm(EntomophageType::class, $entomophage, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class EntomophageController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="entomophage_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="entomophage_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Entomophage/edit.html.twig")
      * @param Entomophage $entomophage
      * @return array
      */
     public function editAction(Entomophage $entomophage)
     {
         return [
-            'form' => $this->createForm(new EntomophageType(), $entomophage)->createView()
+            'form' => $this->createForm(EntomophageType::class, $entomophage)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="entomophage_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Entomophage:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="entomophage_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Entomophage/edit.html.twig")
      * @param Request $request
      * @param Entomophage $entomophage
      * @return array
@@ -80,7 +93,7 @@ class EntomophageController extends DefaultController
             $entomophage = new Entomophage();
         }
 
-        $form = $this->createForm(new EntomophageType(), $entomophage);
+        $form = $this->createForm(EntomophageType::class, $entomophage);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class EntomophageController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="entomophage_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="entomophage_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Entomophage $entomophage
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Entomophage $entomophage)
     {

@@ -5,8 +5,8 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Blight;
 use Admin\CatalogBundle\Form\BlightType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,9 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 class BlightController extends DefaultController
 {
     /**
+     * @Route(
+     *     path="/",
+     *     name="blight",
+     *     methods={"GET"}
+     * )
      * @Route("/", name="blight")
-     * @Method({"GET"})
-     * @Template()
+     * @Template("@AdminCatalog/Blight/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +39,18 @@ class BlightController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="blight_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Blight:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="blight_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Blight/edit.html.twig")
      */
     public function addAction()
     {
         $blight = new Blight();
 
-        $form = $this->createForm(new BlightType(), $blight, [
+        $form = $this->createForm(BlightType::class, $blight, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +60,30 @@ class BlightController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="blight_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="blight_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Blight/edit.html.twig")
      * @param Blight $blight
      * @return array
      */
     public function editAction(Blight $blight)
     {
         return [
-            'form' => $this->createForm(new BlightType(), $blight)->createView()
+            'form' => $this->createForm(BlightType::class, $blight)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="blight_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Blight:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="blight_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Blight/edit.html.twig")
      * @param Request $request
      * @param Blight $blight
      * @return array
@@ -80,7 +94,7 @@ class BlightController extends DefaultController
             $blight = new Blight();
         }
 
-        $form = $this->createForm(new BlightType(), $blight);
+        $form = $this->createForm(BlightType::class, $blight);
 
         $form->handleRequest($request);
 
@@ -96,10 +110,13 @@ class BlightController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="blight_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="blight_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Blight $blight
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Blight $blight)
     {

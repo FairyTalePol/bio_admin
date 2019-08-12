@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 3/24/14
- * Time: 4:31 PM
- */
 
 namespace Admin\LanguageBundle\Controller;
 
@@ -14,11 +8,12 @@ use Admin\LanguageBundle\Entity\Translation;
 use Admin\LanguageBundle\Form\Entity\TranslationSearch;
 use Admin\LanguageBundle\Form\TranslationSearchType;
 use Admin\LanguageBundle\Form\TranslationType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * Auth controller.
@@ -28,26 +23,37 @@ use Symfony\Component\HttpFoundation\Request;
 class TranslationController extends DefaultController
 {
     /**
-     * @Route("/", name="translation")
-     * @Route("/{language_id}", name="translation2")
+     * @Route(
+     *     path="/",
+     *     name="translation",
+     *     methods={"GET", "POST"}
+     * )
+     * @Route(
+     *     path="/{language_id}",
+     *     name="translation2",
+     *     methods={"GET", "POST"}
+     * )
      * @ParamConverter("language", class="AdminLanguageBundle:Language", options={"id" = "language_id"})
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Template("@AdminLanguage/Translation/index.html.twig")
+     * @param Request $request
      * @param Language $language
      * @return array
      */
     public function indexAction(Request $request, Language $language = null)
     {
         if ($language == null) {
-            $language = $this->getLanguageRepository()->findOneBy([], [
-                'name' => 'ASC'
-            ]);
+            $language = $this->getLanguageRepository()->findOneBy(
+                [],
+                [
+                    'name' => 'ASC',
+                ]
+            );
         }
 
         $translationSearch = new TranslationSearch();
         $translationSearch->setLanguage($language);
 
-        $form = $this->createForm(new TranslationSearchType(), $translationSearch);
+        $form = $this->createForm(TranslationSearchType::class, $translationSearch);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -58,16 +64,19 @@ class TranslationController extends DefaultController
         return [
             'translations' => $translations,
             'form' => $form->createView(),
-            'pages' => $pages
+            'pages' => $pages,
         ];
     }
 
     /**
-     * @Route("/delete/{id}", name="translation_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="translation_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @ParamConverter("translation", class="AdminLanguageBundle:Translation")
      * @param Translation $translation
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Translation $translation)
     {
@@ -82,10 +91,13 @@ class TranslationController extends DefaultController
     }
 
     /**
-     * @Route("/add/{language_id}", name="translation_add")
+     * @Route(
+     *     path="/add/{language_id}",
+     *     name="translation_add",
+     *     methods={"GET", "POST"}
+     * )
      * @ParamConverter("language", class="AdminLanguageBundle:Language", options={"id" = "language_id"})
-     * @Method({"GET", "POST"})
-     * @Template("AdminLanguageBundle:Translation:edit.html.twig")
+     * @Template("@AdminLanguage/Translation/edit.html.twig")
      * @param Language $language
      * @return array
      */
@@ -93,21 +105,28 @@ class TranslationController extends DefaultController
     {
         $translation = new Translation();
 
-        $form = $this->createForm(new TranslationType(), $translation, [
-            'error_bubbling' => true,
-        ]);
+        $form = $this->createForm(
+            TranslationType::class,
+            $translation,
+            [
+                'error_bubbling' => true,
+            ]
+        );
 
         return [
             'form' => $form->createView(),
-            'language' => $language
+            'language' => $language,
         ];
     }
 
     /**
-     * @Route("/edit/{id}", name="translation_edit")
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="translation_edit",
+     *     methods={"GET", "POST"}
+     * )
      * @ParamConverter("translation", class="AdminLanguageBundle:Translation")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Template("@AdminLanguage/Translation/edit.html.twig")
      * @param Request $request
      * @param Translation $translation
      * @return array
@@ -115,25 +134,32 @@ class TranslationController extends DefaultController
     public function editAction(Request $request, Translation $translation)
     {
         return [
-            'form' => $this->createForm(new TranslationType(), $translation)->createView(),
-            'language' => $translation->getLanguage()
+            'form' => $this->createForm(TranslationType::class, $translation)->createView(),
+            'language' => $translation->getLanguage(),
         ];
     }
 
     /**
-     * @Route("/update/{id}", name="translation_update")
+     * @Route(
+     *     path="/update/{id}",
+     *     name="translation_update",
+     *     methods={"POST"}
+     * )
      * @ParamConverter("translation", class="AdminLanguageBundle:Translation")
-     * @Method({"POST"})
-     * @Template("AdminLanguageBundle:Translation:edit.html.twig")
+     * @Template("@AdminLanguage/Translation/edit.html.twig")
      * @param Request $request
      * @param Translation $translation
      * @return array
      */
     public function updateAction(Request $request, Translation $translation = null)
     {
-        $form = $this->createForm(new TranslationType(), $translation, [
-            'em' => $this->getDoctrine()->getManager()
-        ]);
+        $form = $this->createForm(
+            TranslationType::class,
+            $translation,
+            [
+                'em' => $this->getDoctrine()->getManager(),
+            ]
+        );
 
         $form->handleRequest($request);
 
@@ -147,15 +173,18 @@ class TranslationController extends DefaultController
 
         return [
             'form' => $form->createView(),
-            'language' => $translation->getLanguage()
+            'language' => $translation->getLanguage(),
         ];
     }
 
     /**
-     * @Route("/create/{language_id}", name="translation_create")
+     * @Route(
+     *     path="/create/{language_id}",
+     *     name="translation_create",
+     *     methods={"POST"}
+     * )
      * @ParamConverter("language", class="AdminLanguageBundle:Language", options={"id" = "language_id"})
-     * @Method({"POST"})
-     * @Template("AdminLanguageBundle:Translation:edit.html.twig")
+     * @Template("@AdminLanguage/Translation/edit.html.twig")
      * @param Request $request
      * @param Language $language
      * @return array
@@ -169,10 +198,14 @@ class TranslationController extends DefaultController
             ->setLanguage($language)
             ->setTerm(new Term());
 
-        $form = $this->createForm(new TranslationType(), $translation, [
-            'cascade_validation' => true,
-            'em' => $this->getDoctrine()->getManager(),
-        ]);
+        $form = $this->createForm(
+            TranslationType::class,
+            $translation,
+            [
+                'constraints' => new Valid(),
+                'em' => $this->getDoctrine()->getManager(),
+            ]
+        );
 
         $form->handleRequest($request);
 
@@ -186,7 +219,7 @@ class TranslationController extends DefaultController
 
         return [
             'form' => $form->createView(),
-            'language' => $translation->getLanguage()
+            'language' => $translation->getLanguage(),
         ];
     }
 }

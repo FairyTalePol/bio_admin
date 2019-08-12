@@ -1,19 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 3/24/14
- * Time: 4:31 PM
- */
 
 namespace Admin\ClientBundle\Controller;
 
 use Admin\ClientBundle\Entity\Client;
 use Admin\ClientBundle\Form\ClientType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -23,109 +17,128 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ClientController extends DefaultController
 {
-  /**
-   * @Route("/", name="client")
-   * @Method({"GET"})
-   * @Template()
-   */
-  public function indexAction()
-  {
-    $clients = $this->getClientRepository()
-      ->createQueryBuilder('c')
-      ->orderBy('c.email', 'ASC')
-      ->getQuery()
-      ->getResult();
+    /**
+     * @Route(
+     *     path="/",
+     *     name="client",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminClient/Client/index.html.twig")
+     */
+    public function indexAction()
+    {
+        $clients = $this->getClientRepository()
+            ->createQueryBuilder('c')
+            ->orderBy('c.email', 'ASC')
+            ->getQuery()
+            ->getResult();
 
-    return [
-      'clients' => $clients
-    ];
-  }
+        return [
+            'clients' => $clients,
+        ];
+    }
 
     /**
-     * @Route("/delete/{id}", name="client_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="client_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @ParamConverter("client", class="AdminClientBundle:Client")
      * @param Client $client
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
-  public function deleteAction(Client $client)
-  {
-    $em = $this->getDoctrine()->getManager();
+    public function deleteAction(Client $client)
+    {
+        $em = $this->getDoctrine()->getManager();
 
-    $em->remove($client);
-    $em->flush();
+        $em->remove($client);
+        $em->flush();
 
-    return $this->redirect($this->generateUrl('client'));
-  }
-
-  /**
-   * @Route("/add", name="client_add")
-   * @Method({"GET", "POST"})
-   * @Template("AdminClientBundle:Client:edit.html.twig")
-   */
-  public function addAction()
-  {
-    $client = new Client();
-
-    $form = $this->createForm(new ClientType(), $client, [
-      'error_bubbling' => true
-    ]);
-
-    return [
-      'form' => $form->createView()
-    ];
-  }
+        return $this->redirect($this->generateUrl('client'));
+    }
 
     /**
-     * @Route("/edit/{id}", name="client_edit")
-     * @ParamConverter("client", class="AdminClientBundle:Client")
-     * @Method({"GET", "POST"})
-     * @Template()
-     * @param Client $client
-     * @return array
+     * @Route(
+     *     path="/add",
+     *     name="client_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminClient/Client/edit.html.twig")
      */
-  public function editAction(Client $client)
-  {
-    return [
-      'form' => $this->createForm(new ClientType(), $client)->createView()
-    ];
-  }
+    public function addAction()
+    {
+        $client = new Client();
+
+        $form = $this->createForm(ClientType::class, $client, [
+                'error_bubbling' => true,
+            ]
+        );
+
+        return [
+            'form' => $form->createView(),
+        ];
+    }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="client_update")
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="client_edit",
+     *     methods={"GET", "POST"}
+     * )
      * @ParamConverter("client", class="AdminClientBundle:Client")
-     * @Method({"POST"})
-     * @Template("AdminClientBundle:Client:edit.html.twig")
+     * @Template("@AdminClient/Client/edit.html.twig")
      * @param Request $request
      * @param Client $client
      * @return array
      */
-  public function updateAction(Request $request, Client $client = null)
-  {
-    if (!$client) {
-      $client = new Client();
-      $client->setRegIp($request->getClientIp());
-      $client->setRegDtm(new \DateTime());
+    public function editAction(Request $request, Client $client)
+    {
+        return [
+            'form' => $this->createForm(ClientType::class, $client)->createView(),
+        ];
     }
 
-    $form = $this->createForm(new ClientType(), $client);
+    /**
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="client_update",
+     *     methods={"POST"}
+     * )
+     * @ParamConverter("client", class="AdminClientBundle:Client")
+     * @Template("@AdminClient/Client/edit.html.twig")
+     * @param Request $request
+     * @param Client|null $client
+     * @return array
+     * @throws \Exception
+     */
+    public function updateAction(Request $request, Client $client = null)
+    {
+        if (!$client) {
+            $client = new Client();
+            $client->setRegIp($request->getClientIp());
+            $client->setRegDtm(new \DateTime());
+        }
 
-    $form->handleRequest($request);
+        $form = $this->createForm(ClientType::class, $client);
 
-    if ($form->isValid()) {
-      $em = $this->getDoctrine()->getManager();
+        $form->handleRequest($request);
 
-      if ($client->getId()) {
-          $em->merge($client);
-      } else {
-          $em->persist($client);
-      }
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
 
-      $em->flush();
+            if ($client->getId()) {
+                $em->merge($client);
+            } else {
+                $em->persist($client);
+            }
+
+            $em->flush();
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
     }
-
-    return [
-      'form' => $form->createView()
-    ];
-  }
-} 
+}

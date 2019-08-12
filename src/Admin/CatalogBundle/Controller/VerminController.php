@@ -5,8 +5,8 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Vermin;
 use Admin\CatalogBundle\Form\VerminType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,9 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 class VerminController extends DefaultController
 {
     /**
-     * @Route("/", name="vermin")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="vermin",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/Vermin/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class VerminController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="vermin_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Vermin:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="vermin_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Vermin/edit.html.twig")
      */
     public function addAction()
     {
         $vermin = new Vermin();
 
-        $form = $this->createForm(new VerminType(), $vermin, [
+        $form = $this->createForm(VerminType::class, $vermin, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class VerminController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="vermin_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="vermin_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Vermin/edit.html.twig")
      * @param Vermin $vermin
      * @return array
      */
     public function editAction(Vermin $vermin)
     {
         return [
-            'form' => $this->createForm(new VerminType(), $vermin)->createView()
+            'form' => $this->createForm(VerminType::class, $vermin)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="vermin_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Vermin:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="vermin_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Vermin/edit.html.twig")
      * @param Request $request
      * @param Vermin $vermin
      * @return array
@@ -80,7 +93,7 @@ class VerminController extends DefaultController
             $vermin = new Vermin();
         }
 
-        $form = $this->createForm(new VerminType(), $vermin);
+        $form = $this->createForm(VerminType::class, $vermin);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class VerminController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="vermin_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="vermin_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Vermin $vermin
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Vermin $vermin)
     {

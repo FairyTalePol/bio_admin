@@ -51,7 +51,7 @@ class Term extends CUBase
 
     /**
      * @param string $name
-     * @return Language
+     * @return Term
      */
     public function setName($name)
     {

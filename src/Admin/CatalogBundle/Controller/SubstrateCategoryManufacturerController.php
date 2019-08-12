@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\SubstrateCategoryManufacturer;
 use Admin\CatalogBundle\Form\SubstrateCategoryManufacturerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * SubstrateCategoryManufacturer API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class SubstrateCategoryManufacturerController extends DefaultController
 {
     /**
-     * @Route("/", name="substrate_manufacturer")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="substrate_manufacturer",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategoryManufacturer/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class SubstrateCategoryManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="substrate_manufacturer_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:SubstrateCategoryManufacturer:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="substrate_manufacturer_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategoryManufacturer/edit.html.twig")
      */
     public function addAction()
     {
         $substrate_manufacturer = new SubstrateCategoryManufacturer();
 
-        $form = $this->createForm(new SubstrateCategoryManufacturerType(), $substrate_manufacturer, [
+        $form = $this->createForm(SubstrateCategoryManufacturerType::class, $substrate_manufacturer, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class SubstrateCategoryManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="substrate_manufacturer_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="substrate_manufacturer_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategoryManufacturer/edit.html.twig")
      * @param SubstrateCategoryManufacturer $substrate_manufacturer
      * @return array
      */
     public function editAction(SubstrateCategoryManufacturer $substrate_manufacturer)
     {
         return [
-            'form' => $this->createForm(new SubstrateCategoryManufacturerType(), $substrate_manufacturer)->createView()
+            'form' => $this->createForm(SubstrateCategoryManufacturerType::class, $substrate_manufacturer)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="substrate_manufacturer_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:SubstrateCategoryManufacturer:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="substrate_manufacturer_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/SubstrateCategoryManufacturer/edit.html.twig")
      * @param Request $request
      * @param SubstrateCategoryManufacturer $substrate_manufacturer
      * @return array
@@ -80,7 +93,7 @@ class SubstrateCategoryManufacturerController extends DefaultController
             $substrate_manufacturer = new SubstrateCategoryManufacturer();
         }
 
-        $form = $this->createForm(new SubstrateCategoryManufacturerType(), $substrate_manufacturer);
+        $form = $this->createForm(SubstrateCategoryManufacturerType::class, $substrate_manufacturer);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class SubstrateCategoryManufacturerController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="substrate_manufacturer_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="substrate_manufacturer_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param SubstrateCategoryManufacturer $substrate_manufacturer
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(SubstrateCategoryManufacturer $substrate_manufacturer)
     {

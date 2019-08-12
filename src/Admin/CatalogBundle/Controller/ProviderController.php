@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Provider;
 use Admin\CatalogBundle\Form\ProviderType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Provider API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ProviderController extends DefaultController
 {
     /**
-     * @Route("/", name="provider")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="provider",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/Provider/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class ProviderController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="provider_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Provider:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="provider_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Provider/edit.html.twig")
      */
     public function addAction()
     {
         $provider = new Provider();
 
-        $form = $this->createForm(new ProviderType(), $provider, [
+        $form = $this->createForm(ProviderType::class, $provider, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class ProviderController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="provider_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="provider_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Provider/edit.html.twig")
      * @param Provider $provider
      * @return array
      */
     public function editAction(Provider $provider)
     {
         return [
-            'form' => $this->createForm(new ProviderType(), $provider)->createView()
+            'form' => $this->createForm(ProviderType::class, $provider)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="provider_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Provider:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="provider_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Provider/edit.html.twig")
      * @param Request $request
      * @param Provider $provider
      * @return array
@@ -80,7 +93,7 @@ class ProviderController extends DefaultController
             $provider = new Provider();
         }
 
-        $form = $this->createForm(new ProviderType(), $provider);
+        $form = $this->createForm(ProviderType::class, $provider);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class ProviderController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="provider_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="provider_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Provider $provider
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Provider $provider)
     {

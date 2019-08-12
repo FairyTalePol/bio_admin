@@ -30,7 +30,7 @@ class ClientType extends AbstractType
             ])
             ->add('db_role', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class' => 'Admin\ClientBundle\Entity\DBRole',
-                'property' => 'role',
+                'choice_label' => 'role',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Роль DB'

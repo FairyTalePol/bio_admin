@@ -134,7 +134,7 @@ class DBRole
   }
 
   /**
-   * @param \Doctrine\Common\Collections\ArrayCollection $clients
+   * @param ArrayCollection $clients
    * @return DBRole
    */
   public function setClients($clients)
@@ -166,18 +166,19 @@ class DBRole
   }
 
   /**
-   * @return \Doctrine\Common\Collections\ArrayCollection
+   * @return ArrayCollection
    */
   public function getClients()
   {
     return $this->clients;
   }
 
-  /**
-   * @ORM\PrePersist()
-   *
-   * @return Client
-   */
+    /**
+     * @ORM\PrePersist()
+     *
+     * @return DBRole
+     * @throws \Exception
+     */
   public function setCreated()
   {
     $this->created = new \DateTime();
@@ -194,11 +195,12 @@ class DBRole
     return $this->created;
   }
 
-  /**
-   * @ORM\PreUpdate()
-   *
-   * @return Client
-   */
+    /**
+     * @ORM\PreUpdate()
+     *
+     * @return Client
+     * @throws \Exception
+     */
   public function setUpdated()
   {
     $this->updated = new \DateTime();

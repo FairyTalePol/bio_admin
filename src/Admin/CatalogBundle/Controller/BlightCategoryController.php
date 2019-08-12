@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\BlightCategory;
 use Admin\CatalogBundle\Form\BlightCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * BlightCategory API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class BlightCategoryController extends DefaultController
 {
     /**
-     * @Route("/", name="blight_category")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="blight_category",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/BlightCategory/index.html.twig")
      */
     public function indexAction()
     {
@@ -30,46 +33,60 @@ class BlightCategoryController extends DefaultController
             ->getResult();
 
         return [
-            'blight_categories' => $blight_categories
+            'blight_categories' => $blight_categories,
         ];
     }
 
     /**
-     * @Route("/add", name="blight_category_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:BlightCategory:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="blight_category_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/BlightCategory/edit.html.twig")
      */
     public function addAction()
     {
         $blight_category = new BlightCategory();
 
-        $form = $this->createForm(new BlightCategoryType(), $blight_category, [
-            'error_bubbling' => true
-        ]);
+        $form = $this->createForm(
+            BlightCategoryType::class,
+            $blight_category,
+            [
+                'error_bubbling' => true,
+            ]
+        );
 
         return [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
     /**
-     * @Route("/edit/{id}", name="blight_category_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="blight_category_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/BlightCategory/edit.html.twig")
      * @param BlightCategory $blight_category
      * @return array
      */
     public function editAction(BlightCategory $blight_category)
     {
         return [
-            'form' => $this->createForm(new BlightCategoryType(), $blight_category)->createView()
+            'form' => $this->createForm(BlightCategoryType::class, $blight_category)->createView(),
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="blight_category_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:BlightCategory:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="blight_category_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/BlightCategory/edit.html.twig")
      * @param Request $request
      * @param BlightCategory $blight_category
      * @return array
@@ -80,7 +97,7 @@ class BlightCategoryController extends DefaultController
             $blight_category = new BlightCategory();
         }
 
-        $form = $this->createForm(new BlightCategoryType(), $blight_category);
+        $form = $this->createForm(BlightCategoryType::class, $blight_category);
 
         $form->handleRequest($request);
 
@@ -91,15 +108,18 @@ class BlightCategoryController extends DefaultController
         }
 
         return [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 
     /**
-     * @Route("/delete/{id}", name="blight_category_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="blight_category_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param BlightCategory $blight_category
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(BlightCategory $blight_category)
     {

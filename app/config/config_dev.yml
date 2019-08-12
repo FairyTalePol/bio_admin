@@ -31,7 +31,7 @@ monolog:
 
 assetic:
     use_controller: true
-    write_to:       %kernel.root_dir%/../web/compiled/
+    write_to:       "%kernel.root_dir%/../web/compiled/"
 
 swiftmailer:
 #    disable_delivery: true

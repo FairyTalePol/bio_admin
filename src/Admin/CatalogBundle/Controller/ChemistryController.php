@@ -5,9 +5,9 @@ namespace Admin\CatalogBundle\Controller;
 use Admin\CatalogBundle\Entity\Chemistry;
 use Admin\CatalogBundle\Form\ChemistryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Chemistry API controller.
@@ -17,9 +17,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ChemistryController extends DefaultController
 {
     /**
-     * @Route("/", name="chemistry")
-     * @Method({"GET"})
-     * @Template()
+     * @Route(
+     *     path="/",
+     *     name="chemistry",
+     *     methods={"GET"}
+     * )
+     * @Template("@AdminCatalog/Chemistry/index.html.twig")
      */
     public function indexAction()
     {
@@ -35,15 +38,18 @@ class ChemistryController extends DefaultController
     }
 
     /**
-     * @Route("/add", name="chemistry_add")
-     * @Method({"GET", "POST"})
-     * @Template("AdminCatalogBundle:Chemistry:edit.html.twig")
+     * @Route(
+     *     path="/add",
+     *     name="chemistry_add",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Chemistry/edit.html.twig")
      */
     public function addAction()
     {
         $chemistry = new Chemistry();
 
-        $form = $this->createForm(new ChemistryType(), $chemistry, [
+        $form = $this->createForm(ChemistryType::class, $chemistry, [
             'error_bubbling' => true
         ]);
 
@@ -53,23 +59,30 @@ class ChemistryController extends DefaultController
     }
 
     /**
-     * @Route("/edit/{id}", name="chemistry_edit")
-     * @Method({"GET", "POST"})
-     * @Template()
+     * @Route(
+     *     path="/edit/{id}",
+     *     name="chemistry_edit",
+     *     methods={"GET", "POST"}
+     * )
+     * @Template("@AdminCatalog/Chemistry/edit.html.twig")
      * @param Chemistry $chemistry
      * @return array
      */
     public function editAction(Chemistry $chemistry)
     {
         return [
-            'form' => $this->createForm(new ChemistryType(), $chemistry)->createView()
+            'form' => $this->createForm(ChemistryType::class, $chemistry)->createView()
         ];
     }
 
     /**
-     * @Route("/update/{id}", defaults={"id" = null}, name="chemistry_update")
-     * @Method({"POST"})
-     * @Template("AdminCatalogBundle:Chemistry:edit.html.twig")
+     * @Route(
+     *     path="/update/{id}",
+     *     defaults={"id" = null},
+     *     name="chemistry_update",
+     *     methods={"POST"}
+     * )
+     * @Template("@AdminCatalog/Chemistry/edit.html.twig")
      * @param Request $request
      * @param Chemistry $chemistry
      * @return array
@@ -80,7 +93,7 @@ class ChemistryController extends DefaultController
             $chemistry = new Chemistry();
         }
 
-        $form = $this->createForm(new ChemistryType(), $chemistry);
+        $form = $this->createForm(ChemistryType::class, $chemistry);
 
         $form->handleRequest($request);
 
@@ -96,10 +109,13 @@ class ChemistryController extends DefaultController
     }
 
     /**
-     * @Route("/delete/{id}", name="chemistry_delete")
-     * @Method({"GET", "POST", "DELETE"})
+     * @Route(
+     *     path="/delete/{id}",
+     *     name="chemistry_delete",
+     *     methods={"GET", "POST", "DELETE"}
+     * )
      * @param Chemistry $chemistry
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Chemistry $chemistry)
     {

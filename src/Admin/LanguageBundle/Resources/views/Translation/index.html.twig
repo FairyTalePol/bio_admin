@@ -18,23 +18,45 @@
     <!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
-  <a href="{{ path('translation_add', {language_id: form.vars.value.language.id}) }}" id="add-translation-btn" class="btn btn-primary col-sm-3">Добавить перевод</a>
+  <h3 class="text-center">Переводы</h3>
 
-  <form id="search_translations" class="form-inline" enctype="application/x-www-form-urlencoded" method="post" action="{{ path('translation') }}">
+  <a href="{{ path('translation_add', {language_id: form.vars.value.language.id}) }}" id="add-translation-btn"
+     class="btn btn-primary col-sm-3">Добавить перевод</a>
+
+  <form id="search_translations" class="form-inline" enctype="application/x-www-form-urlencoded" method="post"
+        action="{{ path('translation') }}">
     <div class="form-group col-sm-4">
+      <label class="control-label col-sm-2">Язык: </label>
+
       <div class="col-sm-5">
         {{ form_widget(form.language) }}
       </div>
-    </div>
 
-    <table class="table table-responsive table-striped table-hover">
+    </div>
+    {#
+      <div class="dropdown clearfix">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+          {{ language.name }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          {% for language in languages %}
+            <li><a href="{{ path('translation2', {language_id: language.id}) }}">{{ language.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    #}
+    <table class="table table-condensed">
       <thead>
       <tr>
-        <th>Термин</th>
-        <th>Перевод</th>
+        <th style="width: 75px;">Id</th>
+        <th>Term</th>
+        <th>Translation</th>
         <th>&nbsp;</th>
       </tr>
       <tr>
+        <th>{{ form_widget(form.id) }}</th>
         <th>{{ form_widget(form.term) }}</th>
         <th>{{ form_widget(form.value) }}</th>
         <th>
@@ -45,6 +67,7 @@
       <tbody>
       {% for translation in translations %}
         <tr>
+          <td>{{ translation.id }}</td>
           <td style="overflow-x: hidden; text-overflow: ellipsis; max-width: 300px;">{{ translation.term.name }}</td>
           <td style="overflow-x: hidden; text-overflow: ellipsis; max-width: 300px;">{{ translation.value }}</td>
           <td>
