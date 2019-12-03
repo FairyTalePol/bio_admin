@@ -39,9 +39,24 @@ class Vermin extends ImageBase {
     /**
      * @var string
      *
+     * @ORM\Column(name="name_en", type="string", unique=true, nullable=true)
+     * @Assert\NotNull()
+     */
+    private $name_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="short_name", type="string", unique=false, nullable=true)
      */
     private $short_name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="short_name_en", type="string", unique=false, nullable=true)
+     */
+    private $short_name_en;
 
     /**
      * @var string
@@ -53,9 +68,23 @@ class Vermin extends ImageBase {
     /**
      * @var string
      *
+     * @ORM\Column(name="description_en", type="text", unique=false, nullable=true)
+     */
+    private $description_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="dis_description1", type="text", unique=false, nullable=true)
      */
     private $dis_description1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description1_en", type="text", unique=false, nullable=true)
+     */
+    private $dis_description1_en;
 
     /**
      * @var string
@@ -67,9 +96,23 @@ class Vermin extends ImageBase {
     /**
      * @var string
      *
+     * @ORM\Column(name="dis_description2_en", type="text", unique=false, nullable=true)
+     */
+    private $dis_description2_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="dis_description3", type="text", unique=false, nullable=true)
      */
     private $dis_description3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description3_en", type="text", unique=false, nullable=true)
+     */
+    private $dis_description3_en;
 
     /**
      * @var string
@@ -81,9 +124,23 @@ class Vermin extends ImageBase {
     /**
      * @var string
      *
+     * @ORM\Column(name="dis_description4_en", type="text", unique=false, nullable=true)
+     */
+    private $dis_description4_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="dis_description5", type="text", unique=false, nullable=true)
      */
     private $dis_description5;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dis_description5_en", type="text", unique=false, nullable=true)
+     */
+    private $dis_description5_en;
 
     /**
      * @var VerminCategory
@@ -323,6 +380,134 @@ class Vermin extends ImageBase {
     {
         $this->chemistry = $chemistry;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameEn(): ?string
+    {
+        return $this->name_en;
+    }
+
+    /**
+     * @param string $name_en
+     */
+    public function setNameEn(string $name_en): void
+    {
+        $this->name_en = $name_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortNameEn(): ?string
+    {
+        return $this->short_name_en;
+    }
+
+    /**
+     * @param string $short_name_en
+     */
+    public function setShortNameEn(string $short_name_en): void
+    {
+        $this->short_name_en = $short_name_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescriptionEn(): ?string
+    {
+        return $this->description_en;
+    }
+
+    /**
+     * @param string $description_en
+     */
+    public function setDescriptionEn(string $description_en): void
+    {
+        $this->description_en = $description_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription1En(): ?string
+    {
+        return $this->dis_description1_en;
+    }
+
+    /**
+     * @param string $dis_description1_en
+     */
+    public function setDisDescription1En(string $dis_description1_en): void
+    {
+        $this->dis_description1_en = $dis_description1_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription2En(): ?string
+    {
+        return $this->dis_description2_en;
+    }
+
+    /**
+     * @param string $dis_description2_en
+     */
+    public function setDisDescription2En(string $dis_description2_en): void
+    {
+        $this->dis_description2_en = $dis_description2_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription3En(): ?string
+    {
+        return $this->dis_description3_en;
+    }
+
+    /**
+     * @param string $dis_description3_en
+     */
+    public function setDisDescription3En(string $dis_description3_en): void
+    {
+        $this->dis_description3_en = $dis_description3_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription4En(): ?string
+    {
+        return $this->dis_description4_en;
+    }
+
+    /**
+     * @param string $dis_description4_en
+     */
+    public function setDisDescription4En(string $dis_description4_en): void
+    {
+        $this->dis_description4_en = $dis_description4_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisDescription5En(): ?string
+    {
+        return $this->dis_description5_en;
+    }
+
+    /**
+     * @param string $dis_description5_en
+     */
+    public function setDisDescription5En(string $dis_description5_en): void
+    {
+        $this->dis_description5_en = $dis_description5_en;
     }
 
 }

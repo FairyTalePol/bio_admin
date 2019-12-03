@@ -1,8 +1,10 @@
 <?php
 
-namespace Application\Migrations;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+namespace DoctrineMigrations;
+
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -10,7 +12,7 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20140811193532 extends AbstractMigration
 {
-  public function up(Schema $schema)
+  public function up(Schema $schema) : void
   {
     $this->addSql('
       CREATE OR REPLACE VIEW client_view AS
@@ -114,7 +116,7 @@ class Version20140811193532 extends AbstractMigration
     ');
   }
 
-  public function down(Schema $schema)
+  public function down(Schema $schema) : void
   {
     $this->addSql('
       CREATE OR REPLACE VIEW client_view AS

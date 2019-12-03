@@ -1,8 +1,10 @@
 <?php
 
-namespace Application\Migrations;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+namespace DoctrineMigrations;
+
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -10,7 +12,7 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20140325105912 extends AbstractMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema) : void
     {
         $this->addSql('
         DO
@@ -162,7 +164,7 @@ class Version20140325105912 extends AbstractMigration
         $this->addSql("GRANT SELECT ON client_id_seq TO bio_group;");
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema) : void
     {
         $this->addSql("REVOKE SELECT ON client_id_seq FROM bio_group");
         $this->addSql("REVOKE SELECT, UPDATE, DELETE, INSERT ON public.client_view FROM bio_group");

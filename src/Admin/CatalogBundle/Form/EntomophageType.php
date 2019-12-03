@@ -25,6 +25,14 @@ class EntomophageType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('name_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Name'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('short_name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
@@ -33,10 +41,26 @@ class EntomophageType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('short_name_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Short name'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('norm', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Норма внесения в очагах'
+                ],
+                'required' => true,
+                'error_bubbling' => true
+            ])
+            ->add('norm_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Norm'
                 ],
                 'required' => true,
                 'error_bubbling' => true
@@ -50,10 +74,27 @@ class EntomophageType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('description_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Description',
+                    'rows' => '4'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('prophylaxy', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Норма внесения превентивно'
+                ],
+                'required' => true,
+                'error_bubbling' => true
+            ])
+            ->add('prophylaxy_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Prophylaxy'
                 ],
                 'required' => true,
                 'error_bubbling' => true

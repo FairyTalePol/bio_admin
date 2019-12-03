@@ -1,8 +1,10 @@
 <?php
 
-namespace Application\Migrations;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+namespace DoctrineMigrations;
+
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -13,7 +15,7 @@ class Version20161115113448 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function up(Schema $schema)
+    public function up(Schema $schema) : void
     {
         $this->addSql('CREATE OR REPLACE FUNCTION get_translations()
   RETURNS JSONB AS
@@ -44,7 +46,7 @@ class Version20161115113448 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function down(Schema $schema)
+    public function down(Schema $schema) : void
     {
         $this->addSql('REVOKE ALL ON FUNCTION get_translations() FROM GROUP bio_group;');
 

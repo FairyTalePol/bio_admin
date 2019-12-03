@@ -24,6 +24,14 @@ class VerminType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('name_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Name'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('short_name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
@@ -32,10 +40,27 @@ class VerminType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('short_name_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Short name'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Описание',
+                    'rows' => '4'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('description_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Description',
                     'rows' => '4'
                 ],
                 'required' => false,
@@ -50,10 +75,28 @@ class VerminType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('dis_description1_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => '',
+                    'rows' => '3'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('dis_description2', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Порог вредности',
+                    'rows' => '3'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('dis_description2_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => '',
                     'rows' => '3'
                 ],
                 'required' => false,
@@ -68,6 +111,15 @@ class VerminType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('dis_description3_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => '',
+                    'rows' => '3'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('dis_description4', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
@@ -77,10 +129,28 @@ class VerminType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('dis_description4_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => '',
+                    'rows' => '3'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('dis_description5', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Порог вредности',
+                    'rows' => '3'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('dis_description5_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => '',
                     'rows' => '3'
                 ],
                 'required' => false,

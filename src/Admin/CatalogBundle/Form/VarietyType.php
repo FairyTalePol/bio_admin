@@ -25,10 +25,27 @@ class VarietyType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('name_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Name'
+                ],
+                'required' => true,
+                'error_bubbling' => true
+            ])
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Описание',
+                    'rows' => '4'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('description_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Description',
                     'rows' => '4'
                 ],
                 'required' => false,
@@ -50,10 +67,26 @@ class VarietyType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('form_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Form'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('color', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Цвет'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('color_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Color'
                 ],
                 'required' => false,
                 'error_bubbling' => true

@@ -1,8 +1,10 @@
 <?php
 
-namespace Application\Migrations;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+namespace DoctrineMigrations;
+
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -13,7 +15,7 @@ class Version20170127081525 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function up(Schema $schema)
+    public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('GRANT SELECT ON TABLE public.vermin_categories TO bio_group, farming_group;');
@@ -26,7 +28,7 @@ class Version20170127081525 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function down(Schema $schema)
+    public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('REVOKE SELECT ON TABLE public.vermin_categories FROM bio_group, farming_group;');

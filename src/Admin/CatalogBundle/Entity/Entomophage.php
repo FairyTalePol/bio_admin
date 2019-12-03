@@ -40,9 +40,24 @@ class Entomophage extends ImageBase
     /**
      * @var string
      *
+     * @ORM\Column(name="name_en", type="string", unique=true, nullable=true)
+     * @NotNull()
+     */
+    private $name_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="short_name", type="string", unique=false, nullable=true)
      */
     private $short_name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="short_name_en", type="string", unique=false, nullable=true)
+     */
+    private $short_name_en;
 
     /**
      * @var string
@@ -54,6 +69,13 @@ class Entomophage extends ImageBase
     /**
      * @var string
      *
+     * @ORM\Column(name="description_en", type="text", unique=false, nullable=true)
+     */
+    private $description_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="prophylaxy", type="text", unique=false, nullable=true)
      */
     private $prophylaxy;
@@ -61,9 +83,23 @@ class Entomophage extends ImageBase
     /**
      * @var string
      *
+     * @ORM\Column(name="prophylaxy_en", type="text", unique=false, nullable=true)
+     */
+    private $prophylaxy_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="norm", type="string", unique=false, nullable=true)
      */
     private $norm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="norm_en", type="string", unique=false, nullable=true)
+     */
+    private $norm_en;
 
     /**
      * @var ArrayCollection
@@ -255,4 +291,83 @@ class Entomophage extends ImageBase
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getNameEn(): ?string
+    {
+        return $this->name_en;
+    }
+
+    /**
+     * @param string $name_en
+     */
+    public function setNameEn(string $name_en): void
+    {
+        $this->name_en = $name_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortNameEn(): ?string
+    {
+        return $this->short_name_en;
+    }
+
+    /**
+     * @param string $short_name_en
+     */
+    public function setShortNameEn(string $short_name_en): void
+    {
+        $this->short_name_en = $short_name_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescriptionEn(): ?string
+    {
+        return $this->description_en;
+    }
+
+    /**
+     * @param string $description_en
+     */
+    public function setDescriptionEn(string $description_en): void
+    {
+        $this->description_en = $description_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProphylaxyEn(): ?string
+    {
+        return $this->prophylaxy_en;
+    }
+
+    /**
+     * @param string $prophylaxy_en
+     */
+    public function setProphylaxyEn(string $prophylaxy_en): void
+    {
+        $this->prophylaxy_en = $prophylaxy_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNormEn(): ?string
+    {
+        return $this->norm_en;
+    }
+
+    /**
+     * @param string $norm_en
+     */
+    public function setNormEn(string $norm_en): void
+    {
+        $this->norm_en = $norm_en;
+    }
 }

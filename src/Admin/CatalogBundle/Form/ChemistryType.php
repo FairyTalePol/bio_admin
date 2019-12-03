@@ -34,10 +34,26 @@ class ChemistryType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('name_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Name'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('volume', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Объем'
+                ],
+                'required' => true,
+                'error_bubbling' => true
+            ])
+            ->add('volume_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Volume'
                 ],
                 'required' => true,
                 'error_bubbling' => true
@@ -54,6 +70,14 @@ class ChemistryType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Химический класс'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('chemistry_class_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Chemistry Class'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -85,10 +109,27 @@ class ChemistryType extends AbstractType
                 'required' => false,
                 'error_bubbling' => true
             ])
+            ->add('description_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Description',
+                    'rows' => '4'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('action_mechanism', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Механизм действия'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('action_mechanism_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Action mechanism'
                 ],
                 'required' => false,
                 'error_bubbling' => true
@@ -110,7 +151,16 @@ class ChemistryType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('norm_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Norm'
+                ],
+                'required' => true,
+                'error_bubbling' => true
+            ])
             ->add('prophylaxy')
+            ->add('prophylaxy_en')
 
             ->add('manufacturers', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class' => 'Admin\CatalogBundle\Entity\Manufacturer',

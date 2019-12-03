@@ -35,9 +35,24 @@ class Variety extends ImageBase
     /**
      * @var string
      *
+     * @ORM\Column(name="name_en", type="string", nullable=true, unique=true)
+     * @NotNull()
+     */
+    private $name_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true, unique=false)
      */
     private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description_en", type="text", nullable=true, unique=false)
+     */
+    private $description_en;
 
     /**
      * @var string
@@ -56,9 +71,23 @@ class Variety extends ImageBase
     /**
      * @var string
      *
+     * @ORM\Column(name="form_en", type="string", nullable=true, unique=false)
+     */
+    private $form_en;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="color", type="string", nullable=true, unique=false)
      */
     private $color;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="color_en", type="string", nullable=true, unique=false)
+     */
+    private $color_en;
 
     /**
      * @var CultureManufacturer
@@ -193,6 +222,70 @@ class Variety extends ImageBase
     {
         $this->culture_manufacturer = $culture_manufacturer;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameEn(): ?string
+    {
+        return $this->name_en;
+    }
+
+    /**
+     * @param string $name_en
+     */
+    public function setNameEn(string $name_en): void
+    {
+        $this->name_en = $name_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescriptionEn(): ?string
+    {
+        return $this->description_en;
+    }
+
+    /**
+     * @param string $description_en
+     */
+    public function setDescriptionEn(string $description_en): void
+    {
+        $this->description_en = $description_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormEn(): ?string
+    {
+        return $this->form_en;
+    }
+
+    /**
+     * @param string $form_en
+     */
+    public function setFormEn(string $form_en): void
+    {
+        $this->form_en = $form_en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColorEn(): ?string
+    {
+        return $this->color_en;
+    }
+
+    /**
+     * @param string $color_en
+     */
+    public function setColorEn(string $color_en): void
+    {
+        $this->color_en = $color_en;
     }
 
 }

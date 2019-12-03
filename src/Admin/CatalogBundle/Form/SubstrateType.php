@@ -26,10 +26,27 @@ class SubstrateType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true
             ])
+            ->add('name_en', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Name'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Описание',
+                    'rows' => '4'
+                ],
+                'required' => false,
+                'error_bubbling' => true
+            ])
+            ->add('description_en', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Description',
                     'rows' => '4'
                 ],
                 'required' => false,
