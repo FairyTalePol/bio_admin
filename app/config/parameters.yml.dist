@@ -2,7 +2,7 @@
 parameters:
     database_driver: pdo_pgsql
     database_host: localhost
-    database_port: 5433
+    database_port: 5432
     database_name: biocontroller
     database_user: biocontroller_usr
     database_password: 9799
