@@ -1,7 +1,7 @@
 #Mail settings
 parameters:
     mailer_transport: "smtp"
-    #mailer_encryption: ""
+    mailer_encryption: ""
     mailer_auth_mode: "plain"
     mailer_host: "io.mostpromo.com"
     mailer_port: "25"
